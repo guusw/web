@@ -1,0 +1,10 @@
+# Temp files
+*~
+*.swp
+
+# Binaries, private and temporary folders
+nginx
+logs/
+letsencrypt/
+*_temp/
+sources/
