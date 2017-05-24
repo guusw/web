@@ -1,0 +1,4 @@
+#!/bin/bash
+source .config
+php-cgi -b $PHP_BIND -c $PHP_CONFIG_PATH $@
+

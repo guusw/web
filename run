@@ -1,0 +1,3 @@
+#!/bin/bash
+source .config
+nginx -p $ROOT_PATH -c $NGINX_CONFIG_PATH $@
