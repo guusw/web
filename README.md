@@ -9,3 +9,4 @@
 * pcre (development libraries)
 * openssl (development libraries)
 * php-cgi
+* m4 (for configuration file template generation)
