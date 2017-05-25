@@ -733,13 +733,13 @@ user_dir =
 
 ; Directory in which the loadable extensions (modules) reside.
 ; http://php.net/extension-dir
-extension_dir = "/usr/lib/php/modules/"
+extension_dir = "ROOT_PATH/php/modules/"
 ; On windows:
 ; extension_dir = "ext"
 
 ; Directory where the temporary files should be placed.
 ; Defaults to the system default (see sys_get_temp_dir)
-; sys_temp_dir = "/tmp"
+sys_temp_dir = "ROOT_PATH/php/tmp"
 
 ; Whether or not to enable the dl() function.  The dl() function does NOT work
 ; properly in multithreaded servers, such as IIS or Zeus, and is automatically
@@ -1349,7 +1349,7 @@ session.save_handler = files
 ; where MODE is the octal representation of the mode. Note that this
 ; does not overwrite the process's umask.
 ; http://php.net/session.save-path
-;session.save_path = "/tmp"
+session.save_path = "ROOT_PATH/php/sessions"
 
 ; Whether to use strict session mode.
 ; Strict session mode does not accept uninitialized session ID and regenerate
@@ -1595,7 +1595,7 @@ zend.assertions = -1
 ;assert.callback = 0
 
 ; Eval the expression with current error_reporting().  Set to true if you want
-; error_reporting(0) around the eval().
+; error_reporting(0) around the `eval().'
 ; http://php.net/assert.quiet-eval
 ;assert.quiet_eval = 0
 
