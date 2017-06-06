@@ -1,0 +1,227 @@
+body
+{
+	font-family: Segoe UI;
+	font-size: 32px;
+	background-color: black;
+	background: url("Images/tasky_pattern.png");
+	color: white;
+	padding: 0;
+	margin: 0;
+}
+
+/* Common styles */
+.main
+{
+	position: relative;
+	min-width: 800px;
+	top: 25px;
+	width: 75%;
+	border: 2px solid black;
+    /* Set the margin-left and margin-right automatically set */
+    margin: 0 auto; 
+}
+.main #bg
+{
+	z-index: -5;
+	position: absolute;
+	width:100%;
+	height:100%;
+	
+	background-color: black;
+	opacity: 0.5;
+}
+.main #inner
+{
+	color: white;
+	padding: 25;
+}
+
+/* Login sub styles */
+#login
+{
+	width: 25%;
+}
+#login table
+{
+	margin: 0;
+}
+#login input
+{
+	display: inline;
+	margin: 3;
+	padding: 10 20;
+	font-size: 20px;
+	font-family: 
+}
+#login form
+{
+	margin: 0;
+}
+#login #input input
+{
+}
+#login #button input
+{
+}
+
+#panel
+{	
+}
+#panel #top
+{
+	display: flex;
+	margin: 10 0;
+	justify-content: flex-end;
+	text-align: center;
+}
+#panel #top a
+{
+	margin-left: 10px;
+	flex-basis: auto;
+	padding: 10;
+	border-radius: 4px;
+	border: 2px black solid;
+	background-color: rgba(0,0,0,0.5);
+	text-decoration: none;
+	color: grey;
+}
+#panel #top a:hover
+{
+	color: white;
+}
+
+/* Upload button + bar */
+.upload_area a
+{
+	flex: 1;
+	display: none;
+}
+.progress_bar
+{
+	flex: 1;
+	display: none;
+	border-radius: 4px;
+	border: 2px black solid;
+	
+	position: relative;
+    overflow: auto;
+	
+	background-color:  rgba(255,255,255,0.25);
+}
+.progress_bar_inner
+{
+	position: absolute;
+	width: 100%;
+	top: 0; bottom: 0;
+	left: 0; right: 0;
+	background-color: rgba(0,255,0,1.0);
+}
+
+/* Panel sub styles */
+.img_list
+{
+	background-color: rgba(0,0,0,0.4);
+	min-width: 400px;
+	min-height: 300px;
+	padding: 10;
+}
+.img_item
+{
+	display: inline-block;
+	position: relative;
+	width: 128px;
+	height: 128px;
+	margin: 5px;
+	overflow: hidden;
+}
+.img_item .no_thumb
+{
+	width: 128px;
+	height: 128px;
+	background-color: gray;
+}
+.img_item .overlay
+{
+	position: absolute;
+	left:0;
+	padding: 4;
+	font-size: 16px;
+    background-color: rgba(0, 0, 0, 0.7);
+	white-space: nowrap;
+}
+.img_item .clicker
+{
+	position: absolute;
+	cursor: pointer;
+	width: 100%;
+	height: 100%;
+}
+.img_item img
+{
+	width: 128px;
+	height: 128px;
+}
+
+.img_tooltip
+{
+	z-index: 50;
+	position: absolute;
+	border: 2px solid orange;
+	padding: 5;
+	background-color: rgba(0,0,0,0.8);
+	visibility: hidden;
+	color: orange;
+	font-size: 16px;
+}
+
+.dropdown
+{
+	z-index: 100;
+	position: absolute;
+	border: 2px solid orange;
+	padding: 5;
+	visibility: hidden;
+	background-color: rgba(0,0,0,0.8);
+}
+.dropdown a
+{
+	text-align: right;
+	display: block;
+	position: relative;
+	margin-right: auto;
+	right: 0;
+	cursor: pointer;
+	
+	padding: 5;
+	text-decoration: none;
+	font-size: 20px;
+	color: grey;
+}
+.dropdown a:hover
+{
+	color: white;
+}
+.dropdown .remove_b
+{
+	display: none;
+	color: #770000;
+}
+.dropdown .remove_b:hover
+{
+	color: #ff0000;
+}
+.status
+{
+	position: absolute;
+	z-index: 100;
+	border: 2px solid orange;
+	padding: 5;
+	background-color: rgba(0,0,0,0.8);
+	
+	top: 10px;
+	width: 85%;
+	left:0;
+	right:0;
+	margin-left: auto;
+	margin-right: auto;
+}

@@ -1,0 +1,4 @@
+#!/bin/bash
+source .config
+m4 -DROOT_PATH="$ROOT_PATH" conf/php/php.ini.m4>conf/php/php.ini
+m4 -DROOT_PATH="$ROOT_PATH" -DSERVER_NAME="$SERVER_NAME" -DHTTP_PORT=$HTTP_PORT -DHTTPS_PORT=$HTTPS_PORT conf/nginx/nginx.conf.m4>conf/nginx/nginx.conf

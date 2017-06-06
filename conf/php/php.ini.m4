@@ -583,6 +583,7 @@ html_errors = On
 ;error_log = php_errors.log
 ; Log errors to syslog (Event Log on Windows).
 ;error_log = syslog
+error_log = ROOT_PATH/php/error.log
 
 ;windows.show_crt_warning
 ; Default value: 0
@@ -724,7 +725,7 @@ default_charset = "UTF-8"
 ; see documentation for security issues.  The alternate is to use the
 ; cgi.force_redirect configuration below
 ; http://php.net/doc-root
-doc_root =
+doc_root = "ROOT_PATH/www"
 
 ; The directory under which PHP opens the script using /~username used only
 ; if nonempty.
@@ -733,7 +734,7 @@ user_dir =
 
 ; Directory in which the loadable extensions (modules) reside.
 ; http://php.net/extension-dir
-extension_dir = "ROOT_PATH/php/modules/"
+; extension_dir = "ROOT_PATH/php/modules/"
 ; On windows:
 ; extension_dir = "ext"
 
@@ -891,7 +892,7 @@ extension=curl.so
 ;extension=enchant.so
 ;extension=exif.so
 ;extension=ftp.so
-;extension=gd.so
+extension=gd.so
 ;extension=gettext.so
 ;extension=gmp.so
 ;extension=iconv.so
@@ -899,7 +900,7 @@ extension=curl.so
 ;extension=intl.so
 ;extension=ldap.so
 ;extension=mcrypt.so
-;extension=mysqli.so
+extension=mysqli.so
 ;extension=odbc.so
 ;zend_extension=opcache.so
 ;extension=pdo_dblib.so
