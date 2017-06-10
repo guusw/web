@@ -1,0 +1,90 @@
+#!/bin/bash
+
+function failure()
+{
+    echo "Usage: daemonize <start|stop|restart> <pidfile> <binary> <arguments>"
+    exit 1
+}
+
+if [[ "$#" -lt 3 ]]
+then
+    echo "not enough arguments provided $#, expected at least 3"
+    failure
+fi 
+
+Action=$1
+PIDFile=$2
+Bin=$3
+shift 3
+Args="$@"
+
+LogFile="$PIDFile.log"
+
+RunStatus=1
+if [[ -f $PIDFile ]]
+then
+    read CurrentPID < $PIDFile
+    echo "Existing PIDFile: $CurrentPID"
+
+    ps $CurrentPID >/dev/null
+    RunStatus=$?
+    echo "RunStatus: $RunStatus"
+fi
+
+function start()
+{
+    if [[ $RunStatus -eq 0 ]]
+    then
+        echo "$Bin Already running ($RunStatus)"
+        return 2
+    fi
+
+    echo "Starting: $Bin $Args"
+    nohup $Bin $Args > $LogFile &
+    PID=$!
+    echo "PID: $PID"
+    echo $PID>$PIDFile
+}
+
+function stop()
+{
+    if [[ $RunStatus -eq 1 ]]
+    then
+        echo "$Bin is not running"
+        return 2
+    fi
+
+    echo "Stopping $Bin"
+
+    # Kill the process
+    kill $CurrentPID
+    if [[ $? -ne 0 ]]
+    then
+        echo "Failed to stop $Bin"
+        return 3
+    fi
+
+    RunStatus=1
+    echo "Succesfully stopped $Bin [PID $CurrentPID]"
+
+    rm $PIDFile
+}
+
+case $Action in
+"start")
+    start
+    ;;
+"stop")
+    stop
+    ;;
+"restart")
+    stop
+    if [[ $? -eq 3 ]] ; then exit 3; fi
+    start
+    ;;
+*)
+    echo "Unknown action $Action"
+    failure
+    ;;
+esac
+
