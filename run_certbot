@@ -1,5 +1,7 @@
 #!/bin/bash
 source .config
-CONFIG_DIR=$ROOT_PATH/conf/certbot
-certbot certonly --webroot --config-dir=/home/guus/nginx/certbot --work-dir=/home/guus/nginx --logs-dir=/home/guus/nginx/logs -w /home/guus/nginx/letsencrypt -d shr.tdrz.nl
+
+if [ !-d $CERTBOT_WELL_KNOWN_PATH ]; then mkdir -p $CERTBOT_WELL_KNOWN_PATH; fi
+
+certbot certonly --webroot --config-dir=$CERTBOT_CONFIG_PATH --work-dir=$ROOT_PATH --logs-dir=$ROOT_PATH/logs -w $CERTBOT_WELL_KNOWN_PATH -d $SERVER_NAME
 

@@ -1,6 +1,9 @@
 <?php
     require_once "Header.php";
     
+    // User flags
+    const UFLAG_ADMIN = 0x1;
+
     // Random alphanumerical(lower&upper case) string with given length
     function random_string($len)
     {
@@ -55,6 +58,8 @@
         
         return $ret;
     }
+
+    // Checks user flags
     function check_flags($flags)
     {
         global $user_info; 
@@ -212,13 +217,21 @@
     function get_thumbnail_url($file)
     {
         global $data_dir;
-        $tdir = $data_dir."/thumbs";
+        $thumbs_dir = "/thumbs";
+        $tdir = $data_dir.$thumbs_dir;
         if(!file_exists($tdir))
         {
             return "";
         }
         
-        $tname = $tdir."/".pathinfo($file, PATHINFO_FILENAME).".jpg";
+        // Filename part of the new thumbnail
+        $filename = pathinfo($file, PATHINFO_FILENAME).".jpg";
+
+        // URL
+        $url = $thumbs_dir."/".$filename;
+
+        // Physical path
+        $tname = $tdir."/".$filename;
         
         // Generate image?
         if(!file_exists($tname))
@@ -266,6 +279,7 @@
             imagejpeg($im, $tname);
         }
         
-        return $tname;
+
+        return "raw/thumbs/$filename";
     }
 ?>

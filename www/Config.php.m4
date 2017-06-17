@@ -9,7 +9,10 @@
     $db_user = "MYSQL_USER";
     $db_pw = "MYSQL_PASSWORD";
     $db_name = "MYSQL_DATABASE_NAME";
-    
-    // Folder where site uploaded data is stored
-    $data_dir = "Data";
+
+    // Subdomain for uploaded data
+    $data_dir = "TDRZ_DATA_DIR";
+
+    // Subdomain for data files
+    $data_dub = "TDRZ_DATA_SUBDOMAIN";
 ?>

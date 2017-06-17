@@ -67,6 +67,18 @@
             }
         }
     }
+
+    function generate_external_link($id)
+    {
+        // Get the external url to access files
+        global $server_name;
+        global $server_https;
+        $https_server_name = $server_name;
+        if($server_https != 443)
+            $https_server_name = "$server_name:$server_https";
+
+        return "https://data.$https_server_name/$id";
+    }
     
     function generate_image_list()
     {
@@ -87,13 +99,13 @@
             echo $stmt->error;
         
         $uri_base = $_SERVER["HTTP_HOST"];
-        
+
         echo "\n";
         while($stmt->fetch())
         {
             $file = $data_dir."/".$id.".".$ext;
             $data = [];
-            $data["url"] = "http://$uri_base/$id";
+            $data["url"] = generate_external_link($id);
             $data["id"] = $id;
             $data["ofn"] = $ofn;
             $data["ext"] = $ext;
@@ -118,7 +130,7 @@
             <a href="#" class="upload" onclick="popupUpload()" style="flex-basis: 400px">upload <i class="fa fa-upload"></i></a>
             <!--<a href="#" class="search">search <i class="fa fa-search"></i></a>-->
             <?php 
-                if(check_flags(1))
+                if(check_flags(UFLAG_ADMIN))
                 { 
                     echo "<a href=\"#\" class=\"extra\" id=\"open_extra\">
                     extra <i class=\"fa fa-cog\"></i></a>";
@@ -226,7 +238,7 @@ test tooltip
         var content = "<div class=\"overlay\" style=\"top:0;\">" + imgData.ext + "</div>" +
             "<div class=\"overlay\" style=\"bottom:0;width:100%;\">" + imgData.ofn + "</div>" +
             "<div data-id=\"" + imgData.id + "\" data-url=\"" + imgData.url + "\" class=\"clicker\"></div>";
-            
+        
         if(imgData.thumb && imgData.thumb.length > 0)
         {
             content += "<img src=\"" + imgData.thumb + "\"></img>";
@@ -532,8 +544,8 @@ test tooltip
         
         <?php 
             // Admin buttons
-            if(check_flags(1))
-            { 
+            if(check_flags(UFLAG_ADMIN))
+            {
                 echo "var extraButton = document.getElementById(\"open_extra\");";
                 echo "extraButton.onclick = popupExtra;";
             }

@@ -1,10 +1,38 @@
 #!/bin/bash
 source .config
-m4 -DROOT_PATH="$ROOT_PATH" conf/php/php.ini.m4 >conf/php/php.ini
-m4 -DROOT_PATH="$ROOT_PATH" -DSERVER_NAME="$SERVER_NAME" -DHTTP_PORT=$HTTP_PORT -DHTTPS_PORT=$HTTPS_PORT -DPHP_BIND="$PHP_BIND" conf/nginx/nginx.conf.m4 >conf/nginx/nginx.conf
-m4 -DROOT_PATH="$ROOT_PATH" -DMYSQL_PORT="$MYSQL_PORT" conf/mysql/my.cnf.m4 >conf/mysql/my.cnf
-m4 -DSERVER_NAME="$SERVER_NAME" -DHTTP_PORT=$HTTP_PORT -DHTTPS_PORT=$HTTPS_PORT -DMYSQL_PORT="$MYSQL_PORT" -DMYSQL_USER="$MYSQL_USER" -DMYSQL_PASSWORD="$MYSQL_PASSWORD" -DMYSQL_DATABASE_NAME="$MYSQL_DATABASE_NAME" www/Config.php.m4 >www/Config.php
-m4 -DSERVER_NAME="$SERVER_NAME" -DHTTP_PORT=$HTTP_PORT -DHTTPS_PORT=$HTTPS_PORT -DMYSQL_PORT="$MYSQL_PORT" -DMYSQL_USER="$MYSQL_USER" -DMYSQL_PASSWORD="$MYSQL_PASSWORD" -DMYSQL_DATABASE_NAME="$MYSQL_DATABASE_NAME" www/pma/config.inc.php.m4 >www/pma/config.inc.php
+
+# Create a list of defines to pass to m4
+function addDefine()
+{
+    Defines="$Defines -D$1=$(eval echo \$$1)"
+}
+function addDefineStr()
+{
+    Defines="$Defines -D$1=\"$(eval echo \$$1)\""
+}
+addDefine ROOT_PATH
+addDefine SERVER_NAME
+addDefine HTTP_PORT
+addDefine HTTPS_PORT
+addDefine MYSQL_PORT
+addDefine MYSQL_DATABASE_NAME
+addDefine MYSQL_USER
+addDefine MYSQL_PASSWORD
+addDefine DOCUMENT_ROOT
+addDefine TDRZ_DATA_DIR
+addDefine TDRZ_DATA_SUBDOMAIN
+addDefine CERT_PATH
+addDefine CERT_KEY_PATH
+addDefineStr PHP_BIND
+
+m4 $Defines conf/php/php.ini.m4 >conf/php/php.ini
+m4 $Defines conf/nginx/nginx.conf.m4 >conf/nginx/nginx.conf
+m4 $Defines conf/mysql/my.cnf.m4 >conf/mysql/my.cnf
+m4 $Defines www/Config.php.m4 >www/Config.php
+m4 $Defines www/pma/config.inc.php.m4 >www/pma/config.inc.php
 
 # Make sure php paths exist
 mkdir -p $ROOT_PATH/php/sessions
+
+# Make sure the Data and thumbnails path exist
+mkdir -p $TDRZ_DATA_DIR/thumbs

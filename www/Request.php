@@ -1,9 +1,8 @@
 <?php
-var_dump($_GET);
-phpinfo();
-exit();
     require "Header.php";
     require "FileDB.php";
+    require "ErrMsg.php";
+
     $file_request = $_GET["f"];
     
     // Get optional extension from file path
@@ -40,13 +39,14 @@ exit();
         echo "Invalid range";
         exit(0);
     }
+
     function serve_file($file, $ofn)
     {
         // Don't send php errors in the file stream
-        ini_set('display_errors', '0');
+        ini_set('display_errors', '1');
         
         // retreive mime type from file
-        $fi = new finfo(FILEINFO_MIME, '/usr/share/file/magic.mgc');
+        $fi = new finfo(FILEINFO_MIME);
         $type = $fi->file($file);
         
         if(strpos($type, "text/") !== false)
@@ -126,14 +126,22 @@ exit();
             readfile($file);
         }
     }
+
     function show404()
     {
-        echo "<body style=\"padding:10;font-family: Consolas;\">This file does not exist or has been removed</body>";
+        global $file_request;
+        message_body_begin();
+        message("Request: $file_request");
+        message("This file does not exist or has been removed");
+        message_body_end();
     }
-    function showExtensionMismatch($match)
+    
+    function show_extension_mismatch($match)
     {
         global $url_extension;
-        echo "<body style=\"padding:10;font-family: Consolas;\">File extension in url does not match the file which is [$match], [$url_extension] provided</body>";
+        message_body_begin();
+        message("File extension in url does not match the file which is [$match], [$url_extension] provided");
+        message_body_end();
     }
     
     $file_info = find_file($fn);
@@ -141,25 +149,15 @@ exit();
     {
         $ext = $file_info["extension"];
         $file = "$data_dir/$fn.$ext";
-        
-        if($ext == "gba")
+
+        // Check extension if one is in the url
+        if($url_extension !== false && $url_extension !== $ext)
         {
-            $ofn = $file_info["ofn"];
-            $file = urlencode($file);
-            echo "GBA GAME";
-            header("Location: GBA.php?f=$file&n=$ofn");
+            show_extension_mismatch($ext);
             exit(0);
         }
-        else
-        {
-            // Check extension if one is in the url
-            if($url_extension !== false && $url_extension !== $ext)
-            {
-                showExtensionMismatch($ext);
-                exit(0);
-            }
-            serve_file($file, $file_info["ofn"]);
-        }
+        serve_file($file, $file_info["ofn"]);
+        
         exit(0);
     }
     else

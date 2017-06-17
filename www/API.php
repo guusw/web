@@ -2,7 +2,9 @@
     require_once "Header.php";
     require_once "FileDB.php";
     
+    // API return object
     $result = array("status" => 0);
+
     // Status codes:
     // 0 = ok
     // 1 = need key or invalid key
@@ -10,6 +12,12 @@
     // 3 = file upload error
     // 4 = unknown command
     // 5 = access denied
+    const API_OK = 0;
+    const API_INVALID_KEY = 1;
+    const API_DB_ERROR = 2;
+    const API_UPLOAD_ERROR = 3;
+    const API_UNKOWN_COMMAND = 4;
+    const API_ACCESS_DENIED = 5;
     
     // Exits the script returning the result array as json data
     // also returns the code parameter as result code
@@ -29,6 +37,7 @@
         header("Content-Type", "application/json");
         exit(0);
     }
+
     function require_key()
     {
         // Try to get user from current session first
@@ -61,7 +70,7 @@
         global $result;
         global $data_dir;
         
-        if(!check_flags(1))
+        if(!check_flags(UFLAG_ADMIN))
             api_return(5);
         
         $tdir = "$data_dir/thumbs/*.jpg";
@@ -82,7 +91,7 @@
         global $data_dir;
         global $user_info;
         
-        if(!check_flags(1))
+        if(!check_flags(UFLAG_ADMIN))
             api_return(5);
         
         // Default assigned file owner
