@@ -33,6 +33,7 @@ m4 $Defines www/pma/config.inc.php.m4 >www/pma/config.inc.php
 
 # Make sure php paths exist
 mkdir -p $ROOT_PATH/php/sessions
+mkdir -p $ROOT_PATH/php/tmp
 
 # Make sure the Data and thumbnails path exist
 mkdir -p $TDRZ_DATA_DIR/thumbs

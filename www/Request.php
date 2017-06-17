@@ -17,22 +17,6 @@
         $fn = $file_request;
     }
     
-    $sub_domains = explode(".",$_SERVER['HTTP_HOST']);
-    $sub = array_shift($sub_domains);
-    if($sub == "code")
-    {
-        $full_path = "code/$fn";
-        if(file_exists($full_path))
-        {
-            require "code/view.php";
-        }
-        else
-        {
-            show404();
-        }
-        exit(0);
-    }
-    
     function range_request_failure()
     {
         http_response_code(416);
@@ -43,7 +27,7 @@
     function serve_file($file, $ofn)
     {
         // Don't send php errors in the file stream
-        ini_set('display_errors', '1');
+        ini_set('display_errors', '0');
         
         // retreive mime type from file
         $fi = new finfo(FILEINFO_MIME);
@@ -59,8 +43,7 @@
                 global $friendly_name;
                 $full_path = $file;
                 $friendly_name = $ofn;
-                require "code/view.php";
-                exit(0);
+                require "Code/View.php";
             }
             else
             {
@@ -76,7 +59,7 @@
         //header("Cache-Control: public"); // needed for i.e.
         header("Content-Type: $type");
         header("Content-Length:".$file_length);
-        header("Content-Disposition: filename=$ofn");
+        header("Content-Disposition: inline; filename=$ofn");
         
         // Satisfy range request?
         if(isset($_SERVER["HTTP_RANGE"]))
