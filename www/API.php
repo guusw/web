@@ -96,39 +96,49 @@
         
         // Default assigned file owner
         $default_owner = 0;
-        
+
         $con = open_db();
         $query1 = "SELECT hash,extension,ofn FROM tdrz_files WHERE id=?";
         $stmt1 = $con->prepare($query1);
         $stmt1->bind_param("s", $id);
         $stmt1->bind_result($hash, $ext, $ofn);
     
-        $query2 = "INSERT INTO tdrz_files(id, hash, ofn, extension, date, owner) VALUES(?,?,?,?,NOW(),$default_owner) ON DUPLICATE KEY UPDATE hash=?, ofn=?, extension=?";
+        $query2 = "INSERT INTO tdrz_files(id, hash, ofn, extension, date, owner)";
+        $query2 .= " VALUES(?,?,?,?,?,$default_owner)";
+        $query2 .= " ON DUPLICATE KEY UPDATE hash=?, ofn=?, date=?, extension=?";
         $stmt2 = $con->prepare($query2);
-        $stmt2->bind_param("sssssss", $id, $hash, $ofn, $ext,
-                    $hash, $ofn, $ext);
+        $stmt2->bind_param("sssssssss", 
+                    $id, $hash, $ofn, $ext, $filetime,
+                    $hash, $ofn, $filetime, $ext);
         
         $fixed_files = 0;
         $files = glob($data_dir."/*.*");
         foreach($files as $file)
         {
             $id = pathinfo($file, PATHINFO_FILENAME);
+            $filetime = date("Y-m-d H:i:s", filemtime($file));
             $curr_ext = pathinfo($file, PATHINFO_EXTENSION);
             $ofn = basename($file);
             $stmt1->execute();
             $update = false;
         
+            //echo "Processing file $file ($id)";
+            //echo "filetime: $filetime";
+
             if($stmt1->fetch())
             {
                 $stmt1->store_result();
                 $curr_hash = md5_file($file);
                 if(strcmp($hash, $curr_hash) != 0)
                 {
+                    //echo "Hash changed $hash -> $curr_hash";
                     $hash = $curr_hash;
                     $update = true;
                 }
+
                 if($ext != $curr_ext)
                 {
+                    //echo "Ext changed $ext -> $curr_ext";
                     $ext = $curr_ext;
                     $update = true;
                 }
@@ -136,6 +146,7 @@
             }
             else
             {
+                //echo "New file";
                 $hash = md5_file($file);
                 $ext = $curr_ext;
                 $update = true;
