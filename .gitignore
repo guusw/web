@@ -1,6 +1,10 @@
 # Temp files
 *~
 *.swp
+*.old
+*.index
+*.log
+*.pid
 
 # Binaries, private and temporary folders
 nginx
@@ -9,3 +13,9 @@ letsencrypt/
 *_temp/
 sources/
 php/
+mysqld/
+proxy_temp/
+scgi_temp/
+uwsgi_temp/
+fastcgi_temp/
+bot/
