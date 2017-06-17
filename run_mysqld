@@ -2,7 +2,7 @@
 
 function failure()
 {
-    echo "Usage: run_php <start|stop|restart>"
+    echo "Usage: run_mysqld <start|stop|restart>"
     exit 1
 }
 
@@ -14,6 +14,5 @@ fi
 
 source .config
 MyPath=`dirname $0`
-$MyPath/daemonize $1 $MyPath/logs/php-cgi.pid php-cgi -b $PHP_BIND -c $PHP_CONFIG_PATH
-
+$MyPath/daemonize $1 $MyPath/logs/mysqld.pid mysqld $MYSQL_ARGS
 

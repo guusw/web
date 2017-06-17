@@ -1,4 +1,10 @@
 #!/bin/bash
 source .config
-m4 -DROOT_PATH="$ROOT_PATH" conf/php/php.ini.m4>conf/php/php.ini
-m4 -DROOT_PATH="$ROOT_PATH" -DSERVER_NAME="$SERVER_NAME" -DHTTP_PORT=$HTTP_PORT -DHTTPS_PORT=$HTTPS_PORT conf/nginx/nginx.conf.m4>conf/nginx/nginx.conf
+m4 -DROOT_PATH="$ROOT_PATH" conf/php/php.ini.m4 >conf/php/php.ini
+m4 -DROOT_PATH="$ROOT_PATH" -DSERVER_NAME="$SERVER_NAME" -DHTTP_PORT=$HTTP_PORT -DHTTPS_PORT=$HTTPS_PORT -DPHP_BIND="$PHP_BIND" conf/nginx/nginx.conf.m4 >conf/nginx/nginx.conf
+m4 -DROOT_PATH="$ROOT_PATH" -DMYSQL_PORT="$MYSQL_PORT" conf/mysql/my.cnf.m4 >conf/mysql/my.cnf
+m4 -DSERVER_NAME="$SERVER_NAME" -DHTTP_PORT=$HTTP_PORT -DHTTPS_PORT=$HTTPS_PORT -DMYSQL_PORT="$MYSQL_PORT" -DMYSQL_USER="$MYSQL_USER" -DMYSQL_PASSWORD="$MYSQL_PASSWORD" -DMYSQL_DATABASE_NAME="$MYSQL_DATABASE_NAME" www/Config.php.m4 >www/Config.php
+m4 -DSERVER_NAME="$SERVER_NAME" -DHTTP_PORT=$HTTP_PORT -DHTTPS_PORT=$HTTPS_PORT -DMYSQL_PORT="$MYSQL_PORT" -DMYSQL_USER="$MYSQL_USER" -DMYSQL_PASSWORD="$MYSQL_PASSWORD" -DMYSQL_DATABASE_NAME="$MYSQL_DATABASE_NAME" www/pma/config.inc.php.m4 >www/pma/config.inc.php
+
+# Make sure php paths exist
+mkdir -p $ROOT_PATH/php/sessions
