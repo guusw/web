@@ -2,6 +2,6 @@
 <script>
 window.setTimeout(function()
 {
-	window.location.replace("chrome://newtab");
+    window.location.replace("chrome://newtab");
 }, 1000);
 </script>
