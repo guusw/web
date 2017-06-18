@@ -46,13 +46,10 @@ http {
     # Data Subdomain
     server {
         listen HTTPS_PORT;
-        server_name ~^ patsubst(TDRZ_DATA_SUBDOMAIN.SERVER_NAME,\.,\\.);
+        server_name TDRZ_DATA_SUBDOMAIN.SERVER_NAME;
         ssl on;
-        # $CERTBOT_LIVE/$TDRZ_DATA_SUBDOMAIN.$SERVER_NAME/fullchain.pem
-        # $CERTBOT_LIVE/$TDRZ_DATA_SUBDOMAIN.$SERVER_NAME/privkey.pem
-
-        ssl_certificate CERT_PATH;
-        ssl_certificate_key CERT_KEY_PATH;
+        ssl_certificate ifdef(`CERT_TEST', testcrt.txt, CERTBOT_LIVE/TDRZ_DATA_SUBDOMAIN.SERVER_NAME/fullchain.pem);
+        ssl_certificate_key ifdef(`CERT_TEST', testkey.txt, CERTBOT_LIVE/TDRZ_DATA_SUBDOMAIN.SERVER_NAME/privkey.pem);
 
         location ~ ^/(.*) {
             rewrite ^/(.*) Request.php?f=$1;
@@ -73,8 +70,8 @@ http {
         listen HTTPS_PORT;
         server_name SERVER_NAME;
         ssl on;
-        ssl_certificate CERT_PATH;
-        ssl_certificate_key CERT_KEY_PATH;
+        ssl_certificate ifdef(`CERT_TEST', testcrt.txt, CERTBOT_LIVE/SERVER_NAME/fullchain.pem);
+        ssl_certificate_key ifdef(`CERT_TEST', testkey.txt, CERTBOT_LIVE/SERVER_NAME/privkey.pem);
 
         # Raw data files
         location ~ /raw(.*) {

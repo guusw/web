@@ -10,6 +10,13 @@ function addDefineStr()
 {
     Defines="$Defines -D$1=\"$(eval echo \$$1)\""
 }
+function addDefineBool()
+{
+    if [[ $1 -ne 0 ]]
+    then
+        Defines="$Defines -D$1"
+    fi
+}
 addDefine ROOT_PATH
 addDefine SERVER_NAME
 addDefine HTTP_PORT
@@ -21,9 +28,8 @@ addDefine MYSQL_PASSWORD
 addDefine DOCUMENT_ROOT
 addDefine TDRZ_DATA_DIR
 addDefine TDRZ_DATA_SUBDOMAIN
-addDefine CERT_TEST
-addDefine TEST_CERT_PATH
-addDefine TEST_CERT_KEY_PATH
+addDefine CERTBOT_LIVE
+addDefineBool CERT_TEST
 addDefine CERTBOT_WELL_KNOWN_PATH
 addDefineStr PHP_BIND
 
