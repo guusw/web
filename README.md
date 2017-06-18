@@ -24,7 +24,7 @@ The service scripts are:
 
 ## Requirements
 
-* git (to download pcre/openssl automatically)
+* git (to download openssl automatically)
 * pcre (development libraries, optional)
 * openssl (development libraries, optional)
 * nginx (optional)
@@ -41,4 +41,5 @@ This repository contains some scripts to make a custom nginx build and use it in
 To build this version, do the following:
 
 * Check `.config` for options
+    * Check the options to automatically download PCRE/OpenSSL if you don't have them installed
 * Run `./build` in the project root folder

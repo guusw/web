@@ -16,9 +16,16 @@ then
 fi
 
 # Optionally clone pcre from github
-if [ $USE_GIT_PCRE -ne 0 ] && [ ! -d sources/pcre/.git ]
+if [ $USE_EXTERNAL_PCRE -ne 0 ] && [ ! -d sources/pcre ]
 then
-    git clone git@github.com:embedthis/pcre.git sources/pcre
+   cd sources
+   Version=pcre-8.40
+   File=$Version.tar.gz
+   curl https://ftp.pcre.org/pub/pcre/$File >$File
+   tar -xf $File 
+   rm $File
+   mv $Version pcre
+   cd ..
 fi
 
 # Optionally clone openssl from github
