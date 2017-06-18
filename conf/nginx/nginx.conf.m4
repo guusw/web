@@ -48,6 +48,9 @@ http {
         listen HTTPS_PORT;
         server_name ~^ patsubst(TDRZ_DATA_SUBDOMAIN.SERVER_NAME,\.,\\.);
         ssl on;
+        # $CERTBOT_LIVE/$TDRZ_DATA_SUBDOMAIN.$SERVER_NAME/fullchain.pem
+        # $CERTBOT_LIVE/$TDRZ_DATA_SUBDOMAIN.$SERVER_NAME/privkey.pem
+
         ssl_certificate CERT_PATH;
         ssl_certificate_key CERT_KEY_PATH;
 

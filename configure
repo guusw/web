@@ -21,8 +21,9 @@ addDefine MYSQL_PASSWORD
 addDefine DOCUMENT_ROOT
 addDefine TDRZ_DATA_DIR
 addDefine TDRZ_DATA_SUBDOMAIN
-addDefine CERT_PATH
-addDefine CERT_KEY_PATH
+addDefine CERT_TEST
+addDefine TEST_CERT_PATH
+addDefine TEST_CERT_KEY_PATH
 addDefine CERTBOT_WELL_KNOWN_PATH
 addDefineStr PHP_BIND
 
