@@ -10,7 +10,7 @@ DataPath=$ROOT_PATH/mysqld/data
 if [[ -d "$DataPath" ]]
 then
     echo "Database already installed, remove $DataPath to reinstall"
-    #exit 1 
+    exit 1 
 fi
 
 mkdir -p $ROOT_PATH/mysqld/data
@@ -18,8 +18,11 @@ mkdir -p $ROOT_PATH/mysqld/data
 echo "Stopping mysqld"
 ./run_mysqld stop
 
+BaseDir=$(dirname `which mysqld`)
+BaseDir=$(dirname $BaseDir)
+
 # Install database
-mysql_install_db --defaults-file="$MYSQL_CONFIG_PATH" --user=$USER --basedir=/usr --datadir="$DataPath"
+mysql_install_db --defaults-file="$MYSQL_CONFIG_PATH" --basedir="$BaseDir" --user=$USER --datadir="$DataPath"
 
 # Change root password
 InitScript=`dirname $MYSQL_CONFIG_PATH`/InitScript.sql

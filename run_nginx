@@ -29,8 +29,7 @@ case $1 in
 "stop")
     "$Nginx" -p $ROOT_PATH -c $NGINX_CONFIG_PATH -s stop
     ;;
-"reload")
-"restart")
+"reload" | "restart")
     "$Nginx" -p $ROOT_PATH -c $NGINX_CONFIG_PATH -s reload
     ;;
 *)
