@@ -6,5 +6,8 @@ then
     mkdir -p $CERTBOT_WELL_KNOWN_PATH
 fi
 
-certbot certonly $@ --webroot --config-dir=$CERTBOT_CONFIG_PATH --work-dir=$ROOT_PATH --logs-dir=$ROOT_PATH/logs -w $CERTBOT_WELL_KNOWN_PATH -d $SERVER_NAME
+CommonArgs="--webroot --config-dir=$CERTBOT_CONFIG_PATH --work-dir=$ROOT_PATH --logs-dir=$ROOT_PATH/logs -w $CERTBOT_WELL_KNOWN_PATH"
+
+certbot certonly $@ $CommonArgs -d $SERVER_NAME
+certbot certonly $@ $CommonArgs -d $TDRZ_DATA_SUBDOMAIN.$SERVER_NAME
 
