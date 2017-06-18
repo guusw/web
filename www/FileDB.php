@@ -15,6 +15,7 @@
         }
         return $res;
     }
+    
     // Non exisiting filename in folder $targetFolder with any extension
     function generate_filename($targetFolder)
     {
@@ -102,9 +103,9 @@
         }
         $stmt->close();
         $last_upload = strtotime($last_upload);
-        
+
         $delta = time() - $last_upload;
-        if($delta < $upload_delay)
+        if($upload_delay > 0 && $delta < $upload_delay)
         {
             $result["upload_timeout"] = ($upload_delay - $delta);
             $result["error"] = "Please wait ".($result["upload_timeout"])." more seconds before uploading again";
@@ -214,6 +215,7 @@
             unlink($tname);
         }
     }
+
     function get_thumbnail_url($file)
     {
         global $data_dir;
@@ -281,5 +283,17 @@
         
 
         return "raw/thumbs/$filename";
+    }
+
+    function generate_external_link($id)
+    {
+        // Get the external url to access files
+        global $server_name;
+        global $server_https;
+        $https_server_name = $server_name;
+        if($server_https != 443)
+            $https_server_name = "$server_name:$server_https";
+
+        return "https://data.$https_server_name/$id";
     }
 ?>

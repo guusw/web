@@ -17,8 +17,8 @@ http {
                       '\n  request_uri:   $request_uri'
                       '\n  query_string:  $query_string';
 
-    access_log  logs/access.log  main;
-    error_log logs/error.log debug;
+    access_log  logs/access_nginx.log  main;
+    error_log logs/error_nginx.log error;
     rewrite_log on;
 
     sendfile        on;
@@ -28,6 +28,11 @@ http {
     keepalive_timeout  65;
 
     #gzip  on;
+
+    # Maximum upload size
+    client_max_body_size 512m;
+    client_body_timeout 5m;
+    client_body_temp_path ROOT_PATH/tmp;
 
     # HTTP File server redirect
     server {

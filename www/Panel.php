@@ -1,6 +1,6 @@
 <?php
-    require "Header.php";
-    require "FileDB.php";
+    require_once "Header.php";
+    require_once "FileDB.php";
     ensure_https();
     
     session_start();
@@ -67,24 +67,11 @@
             }
         }
     }
-
-    function generate_external_link($id)
-    {
-        // Get the external url to access files
-        global $server_name;
-        global $server_https;
-        $https_server_name = $server_name;
-        if($server_https != 443)
-            $https_server_name = "$server_name:$server_https";
-
-        return "https://data.$https_server_name/$id";
-    }
     
     function generate_image_list()
     {
         // Errors are really bad in this scenario since they get injected into the generated JS code
-        //error_reporting(0);
-        ini_set('display_errors', 'Off');
+        ini_set('display_errors', '0');
 
         global $user_info;
         global $data_dir;

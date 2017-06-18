@@ -83,6 +83,7 @@
         }
         api_return(0);
     }
+
     // This function allows the database to be rebuild or fixed by scanning all the files in the data folder
     // it adds non-existing files to the database and fixes any extension+md5 mismatches
     function update_database()
@@ -165,6 +166,7 @@
         $stmt2->close();
         api_return(0);
     }
+
     function upload_file($file, $rename)
     {
         global $result;
@@ -178,6 +180,7 @@
         
         if($file["error"] != 0)
         {
+            $result["error"] = $file["error"];
             api_return(4);
         }
         
@@ -211,7 +214,7 @@
             move_uploaded_file($tmp_name, $dst_path);
         }
         
-        $result["url"] = $uri_base.$dst_id;
+        $result["url"] =  generate_external_link($dst_id);
         $result["id"] = $dst_id;
         $result["ofn"] = $original_name;
         $result["ext"] = $extension;
@@ -271,6 +274,7 @@
                     $result["error"] = "No \"file\" parameter provided";
                     api_return(3);
                 }
+
                 $file = $_FILES["file"];
                 $rename = false;
                 if(isset($_POST["rename"]))
