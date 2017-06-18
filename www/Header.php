@@ -11,12 +11,13 @@
     function open_db()
     {
         global $db_host;
+        global $db_port;
         global $db_user;
         global $db_pw;
         global $db_name;
         global $db_instance;
         if($db_instance == false)
-            $db_instance = mysqli_connect($db_host, $db_user, $db_pw, $db_name);
+            $db_instance = mysqli_connect($db_host, $db_user, $db_pw, $db_name, $db_port);
         return $db_instance;
     }
     

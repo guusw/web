@@ -5,7 +5,8 @@
     $server_https = HTTPS_PORT;
 
     // Database settings
-    $db_host = "127.0.0.1:MYSQL_PORT";
+    $db_host = "127.0.0.1";
+    $db_port = "MYSQL_PORT";
     $db_user = "MYSQL_USER";
     $db_pw = "MYSQL_PASSWORD";
     $db_name = "MYSQL_DATABASE_NAME";

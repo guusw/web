@@ -1,7 +1,10 @@
 #!/bin/bash
 source .config
 
-if [ !-d $CERTBOT_WELL_KNOWN_PATH ]; then mkdir -p $CERTBOT_WELL_KNOWN_PATH; fi
+if [ ! -d $CERTBOT_WELL_KNOWN_PATH ]
+then 
+    mkdir -p $CERTBOT_WELL_KNOWN_PATH
+fi
 
-certbot certonly --webroot --config-dir=$CERTBOT_CONFIG_PATH --work-dir=$ROOT_PATH --logs-dir=$ROOT_PATH/logs -w $CERTBOT_WELL_KNOWN_PATH -d $SERVER_NAME
+certbot certonly $@ --webroot --config-dir=$CERTBOT_CONFIG_PATH --work-dir=$ROOT_PATH --logs-dir=$ROOT_PATH/logs -w $CERTBOT_WELL_KNOWN_PATH -d $SERVER_NAME
 

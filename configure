@@ -23,6 +23,7 @@ addDefine TDRZ_DATA_DIR
 addDefine TDRZ_DATA_SUBDOMAIN
 addDefine CERT_PATH
 addDefine CERT_KEY_PATH
+addDefine CERTBOT_WELL_KNOWN_PATH
 addDefineStr PHP_BIND
 
 m4 $Defines conf/php/php.ini.m4 >conf/php/php.ini

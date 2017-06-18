@@ -31,7 +31,16 @@ http {
     server {
         listen HTTP_PORT;
         server_name ~^((?<subdomain>.*)\.)(?<domain>[^.]+)\.(?<tld>[^.]+)$;
-        return 301 https://$subdomain.$domain:HTTPS_PORT$request_uri;
+
+        # Required for certbot
+        location ^~ /.well-known {
+            autoindex on;
+            alias CERTBOT_WELL_KNOWN_PATH/.well-known;
+        }
+
+        location ~ (.*) {
+            return 302 https://$subdomain.$domain.$tld:HTTPS_PORT$request_uri;
+        }
     }
 
     # Data Subdomain
@@ -67,7 +76,8 @@ http {
         # Raw data files
         location ~ /raw(.*) {
             root TDRZ_DATA_DIR;
-            try_files $1 $1;
+            try_files $1 =404;
+            expires 1d;
         }
 
         location / {
@@ -90,9 +100,5 @@ http {
             fastcgi_pass PHP_BIND;
         }
 
-        # Required for certbot
-        location ^~ /.well-known {
-            alias CERTBOT_WELL_KNOWN_PATH/.well-known;
-        }
     }
 }
