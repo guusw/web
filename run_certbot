@@ -1,13 +1,12 @@
 #!/bin/bash
 source .config
 
+# Make sure the well known path exists
 if [ ! -d $CERTBOT_WELL_KNOWN_PATH ]
 then 
     mkdir -p $CERTBOT_WELL_KNOWN_PATH
 fi
 
-CommonArgs="--webroot --config-dir=$CERTBOT_CONFIG_PATH --work-dir=$ROOT_PATH --logs-dir=$ROOT_PATH/logs -w $CERTBOT_WELL_KNOWN_PATH"
-
-certbot certonly $@ $CommonArgs -d $SERVER_NAME
-certbot certonly $@ $CommonArgs -d $TDRZ_DATA_SUBDOMAIN.$SERVER_NAME
+certbot certonly --webroot $@ $CERTBOT_PARAMS -w $CERTBOT_WELL_KNOWN_PATH -d $SERVER_NAME
+certbot certonly --webroot $@ $CERTBOT_PARAMS -w $CERTBOT_WELL_KNOWN_PATH -d $TDRZ_DATA_SUBDOMAIN.$SERVER_NAME
 
