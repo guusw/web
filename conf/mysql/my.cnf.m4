@@ -19,7 +19,7 @@
 # The following options will be passed to all MariaDB clients
 [client]
 #password	= your_password
-port		= 3306
+port		= MYSQL_PORT
 socket		= ROOT_PATH/mysqld/mysqld.sock
 
 # Here follows entries for some specific programs
@@ -27,7 +27,7 @@ socket		= ROOT_PATH/mysqld/mysqld.sock
 # The MariaDB server
 [mysqld]
 datadir=ROOT_PATH/mysqld/data
-port		= 3306
+port		= MYSQL_PORT
 socket		= ROOT_PATH/mysqld/mysqld.sock
 skip-external-locking
 key_buffer_size = 16M
