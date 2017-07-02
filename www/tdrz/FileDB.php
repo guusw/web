@@ -289,7 +289,7 @@
     {
         // Get the external url to access files
         global $server_name;
-        global $server_https;
+        global $server_public_https;
         $https_server_name = $server_name;
         if($server_public_https != 443)
             $https_server_name = "$server_name:$server_public_https";

@@ -725,7 +725,7 @@ default_charset = "UTF-8"
 ; see documentation for security issues.  The alternate is to use the
 ; cgi.force_redirect configuration below
 ; http://php.net/doc-root
-doc_root = "ROOT_PATH/www"
+; doc_root = "ROOT_PATH/www"
 
 ; The directory under which PHP opens the script using /~username used only
 ; if nonempty.

@@ -17,27 +17,35 @@ function addDefineBool()
         Defines="$Defines -D$1"
     fi
 }
+
 addDefine ROOT_PATH
 addDefine SERVER_NAME
+addDefineStr PHP_BIND
 addDefine HTTP_PORT
 addDefine HTTPS_PORT
+addDefine HTTP_PUBLIC_PORT
+addDefine HTTPS_PUBLIC_PORT
+addDefine HTTPS_PUBLIC_PORT_APPEND
 addDefine MYSQL_PORT
 addDefine MYSQL_DATABASE_NAME
 addDefine MYSQL_USER
 addDefine MYSQL_PASSWORD
 addDefine DOCUMENT_ROOT
+
 addDefine TDRZ_DATA_DIR
 addDefine TDRZ_DATA_SUBDOMAIN
+addDefine COFFEE_SERVER_NAME
+addDefine COFFEE_DIR
+
 addDefine CERTBOT_LIVE
 addDefineBool CERT_TEST
 addDefine CERTBOT_WELL_KNOWN_PATH
-addDefineStr PHP_BIND
 
 m4 $Defines conf/php/php.ini.m4 >conf/php/php.ini
 m4 $Defines conf/nginx/nginx.conf.m4 >conf/nginx/nginx.conf
 m4 $Defines conf/mysql/my.cnf.m4 >conf/mysql/my.cnf
-m4 $Defines www/Config.php.m4 >www/Config.php
-m4 $Defines www/pma/config.inc.php.m4 >www/pma/config.inc.php
+m4 $Defines $DOCUMENT_ROOT/tdrz/Config.php.m4 >$DOCUMENT_ROOT/tdrz/Config.php
+m4 $Defines $DOCUMENT_ROOT/tdrz/pma/config.inc.php.m4 >$DOCUMENT_ROOT/tdrz/pma/config.inc.php
 
 # Make sure php paths exist
 mkdir -p $ROOT_PATH/php/sessions
