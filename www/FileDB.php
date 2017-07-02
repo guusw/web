@@ -291,9 +291,14 @@
         global $server_name;
         global $server_https;
         $https_server_name = $server_name;
-        if($server_https != 443)
-            $https_server_name = "$server_name:$server_https";
+        if($server_public_https != 443)
+            $https_server_name = "$server_name:$server_public_https";
 
-        return "https://data.$https_server_name/$id";
+        global $data_sub;
+        $data_sub1 = "";
+        if($data_sub !== "")
+            $data_sub1 = "${data_sub}.";
+
+        return "https://${data_sub1}${https_server_name}/$id";
     }
 ?>
