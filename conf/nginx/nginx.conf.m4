@@ -95,14 +95,15 @@ define(`CONCAT', `$1$2')dnl
         ssl_certificate ifdef(`CERT_TEST', testcrt.txt, CERTBOT_LIVE/SERVER_NAME/fullchain.pem);
         ssl_certificate_key ifdef(`CERT_TEST', testkey.txt, CERTBOT_LIVE/SERVER_NAME/privkey.pem);
 
-        location ~ ^/(.*)$ {
-            rewrite ^/(.*)$ Request.php?f=$1;
+        location ~^(.*)$ {
+            rewrite ^/(.*)$ /Request.php?f=$1;
             break;
-            
+         
             root DOCUMENT_ROOT/tdrz;
 
             include fastcgi.conf;
 
+            fastcgi_param SCRIPT_FILENAME DOCUMENT_ROOT/tdrz/Request.php;
             # Mitigate https://httpoxy.org/ vulnerabilities
             fastcgi_param HTTP_PROXY "";
             fastcgi_pass PHP_BIND;
