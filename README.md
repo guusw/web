@@ -22,6 +22,12 @@ The service scripts are:
 * `run_mysqld`
 * `run_nginx`
 
+## SSL certificates
+
+To setup ssl certificates, use the `run_certbot` script which will generate/renew any required certificates
+
+Check the contents of this script for the actual used domains
+
 ## Requirements
 
 * git (to download openssl automatically)
