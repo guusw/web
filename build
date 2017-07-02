@@ -15,7 +15,7 @@ then
     git clone git@github.com:nginx/nginx.git sources/nginx
 fi
 
-# Optionally clone pcre from github
+# Optionally download pcre from the official ftp server
 if [ $USE_EXTERNAL_PCRE -ne 0 ] && [ ! -d sources/pcre ]
 then
    cd sources
