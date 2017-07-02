@@ -47,6 +47,24 @@ http {
 
 define(`REDIR_URL_PORT', ifelse(HTTPS_PUBLIC_PORT, `443', `', `:HTTPS_PUBLIC_PORT'))dnl
 define(`CREATE_REDIR_URL', `https://$subdomain$domain.$tld$1$request_uri')dnl
+define(`PHP_REDIR',dnl
+`location ~* ^(.*)\.php$ {
+            root $1;
+
+            fastcgi_split_path_info ^(.+?\.php)(/.*)$;
+            if (!-f $1$fastcgi_script_name) {
+                return 404;
+            }
+
+            include fastcgi.conf;
+
+            # Mitigate https://httpoxy.org/ vulnerabilities
+            fastcgi_param HTTP_PROXY "";
+            fastcgi_pass PHP_BIND;
+        }')dnl
+define(`SUBDOMAIN_MATCH', `(?<subdomain>.+\.)?')dnl
+define(`CONCAT', `$1$2')dnl
+
         location ~ ^(.*)$ {
             return 302 CREATE_REDIR_URL(REDIR_URL_PORT);
         }
@@ -55,7 +73,7 @@ define(`CREATE_REDIR_URL', `https://$subdomain$domain.$tld$1$request_uri')dnl
     # Coffee provider
     server {
         listen HTTPS_PORT;
-        server_name ~^(?<subdomain>.+\.)?COFFEE_SERVER_NAME$;
+        server_name ~^CONCAT(SUBDOMAIN_MATCH, COFFEE_SERVER_NAME)$;
         ssl on;
 
         ssl_certificate ifdef(`CERT_TEST', testcrt.txt, CERTBOT_LIVE/COFFEE_SERVER_NAME/fullchain.pem);
@@ -66,20 +84,7 @@ define(`CREATE_REDIR_URL', `https://$subdomain$domain.$tld$1$request_uri')dnl
             root DOCUMENT_ROOT/coffee;
         }
 
-        location ~* ^(.*)\.php$ {
-            root DOCUMENT_ROOT/coffee;
-
-            fastcgi_split_path_info ^(.+?\.php)(/.*)$;
-            if (!-f DOCUMENT_ROOT/coffee$fastcgi_script_name) {
-                return 404;
-            }
-
-            include fastcgi.conf;
-
-            # Mitigate https://httpoxy.org/ vulnerabilities
-            fastcgi_param HTTP_PROXY "";
-            fastcgi_pass PHP_BIND;
-        }
+        PHP_REDIR(`DOCUMENT_ROOT/coffee')
     }
 
     # Data Subdomain
@@ -124,21 +129,23 @@ define(`CREATE_REDIR_URL', `https://$subdomain$domain.$tld$1$request_uri')dnl
             root DOCUMENT_ROOT/tdrz;
         }
 
-        location ~* ^(.*)\.php$ {
-            root DOCUMENT_ROOT/tdrz;
+        PHP_REDIR(`DOCUMENT_ROOT/tdrz')
+    }
 
-            fastcgi_split_path_info ^(.+?\.php)(/.*)$;
-            if (!-f DOCUMENT_ROOT/tdrz$fastcgi_script_name) {
-                return 404;
-            }
+    # Portfolio
+    server {
+        listen HTTPS_PORT;
+        server_name ~^CONCAT(SUBDOMAIN_MATCH, PORTFOLIO_SERVER_NAME)$;
+        ssl on;
+        ssl_certificate ifdef(`CERT_TEST', testcrt.txt, CERTBOT_LIVE/PORTFOLIO_SERVER_NAME/fullchain.pem);
+        ssl_certificate_key ifdef(`CERT_TEST', testkey.txt, CERTBOT_LIVE/PORTFOLIO_SERVER_NAME/privkey.pem);
 
-            include fastcgi.conf;
-
-            # Mitigate https://httpoxy.org/ vulnerabilities
-            fastcgi_param HTTP_PROXY "";
-            fastcgi_pass PHP_BIND;
+        location / {
+            index Index.php;
+            root DOCUMENT_ROOT/guusw;
         }
 
+        PHP_REDIR(`DOCUMENT_ROOT/guusw')
     }
 
     # Fallback
