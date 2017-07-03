@@ -3,7 +3,7 @@
     ini_set("display_errors", '1');
 
     // Configuration
-    require_once "Config.php";
+    require "Config.php";
 
     $db_instance = false;
     // Opens a database connection
@@ -34,6 +34,4 @@
             exit(0);
         }
     }
-    
-    require "Track.php";
 ?>

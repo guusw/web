@@ -23,13 +23,3 @@ CREATE TABLE `tdrz_users` (
   PRIMARY KEY (`id`),
   UNIQUE KEY `id` (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
-CREATE TABLE `tdrz_visits` (
-  `host` char(50) NOT NULL,
-  `ip` char(50) NOT NULL,
-  `last_visited` datetime DEFAULT NULL,
-  `count` int(11) unsigned DEFAULT NULL,
-  `last_page` char(255) DEFAULT NULL,
-  PRIMARY KEY (`host`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-

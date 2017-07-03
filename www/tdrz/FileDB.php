@@ -1,32 +1,9 @@
 <?php
     require_once "Header.php";
+    require_once "Utils.php";
     
     // User flags
     const UFLAG_ADMIN = 0x1;
-
-    // Random alphanumerical(lower&upper case) string with given length
-    function random_string($len)
-    {
-        $chars = "0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ";
-        $res = "";
-        for($i = 0; $i < $len; $i++)
-        {
-            $res = $res.$chars[rand(0, strlen($chars)-1)];
-        }
-        return $res;
-    }
-    
-    // Non exisiting filename in folder $targetFolder with any extension
-    function generate_filename($targetFolder)
-    {
-        $filename = "";
-        do
-        {
-            $filename = random_string(8);
-        }
-        while(count(glob($targetFolder."/".$filename.".*")) > 0);
-        return $filename;
-    }
     
     // Retreives the information of a user by giving the user's API key
     // returns an array of the user's information with:
@@ -285,20 +262,15 @@
         return "raw/thumbs/$filename";
     }
 
+    // Get the external url to access files given an id
     function generate_external_link($id)
     {
-        // Get the external url to access files
-        global $server_name;
-        global $server_public_https;
-        $https_server_name = $server_name;
-        if($server_public_https != 443)
-            $https_server_name = "$server_name:$server_public_https";
-
         global $data_sub;
         $data_sub1 = "";
         if($data_sub !== "")
             $data_sub1 = "${data_sub}.";
-
-        return "https://${data_sub1}${https_server_name}/$id";
+            
+        global $server_name;
+        return format_public_uri($data_sub1.$server_name, true)."/$id";
     }
 ?>

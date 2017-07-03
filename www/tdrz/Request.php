@@ -44,6 +44,7 @@
                 $full_path = $file;
                 $friendly_name = $ofn;
                 require "Code/View.php";
+                exit(0);
             }
             else
             {
@@ -117,6 +118,7 @@
         message("Request: $file_request");
         message("This file does not exist or has been removed");
         message_body_end();
+        http_response_code(404);
     }
     
     function show_extension_mismatch($match)
