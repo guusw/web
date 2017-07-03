@@ -1,7 +1,8 @@
 #!/bin/bash
-source .config
 
 MyPath=`dirname $0`
+source $MyPath/.config
+
 if [[ -f $MyPath/nginx ]]
 then
     Nginx=$MyPath/nginx

@@ -12,7 +12,7 @@ then
     failure
 fi 
 
-source .config
 MyPath=`dirname $0`
+source $MyPath/.config
 $MyPath/daemonize $1 $MyPath/logs/mysqld.pid mysqld $MYSQL_ARGS
 
