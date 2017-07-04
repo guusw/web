@@ -1,4 +1,4 @@
-# Personal web site and image server setup
+# Web server setup
 
 ## Setup
 
