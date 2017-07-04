@@ -1,5 +1,5 @@
 worker_processes  1;
-pid ROOT_PATH/tmp/nginx.pid;
+pid ROOT_PATH/logs/nginx.pid;
 
 events {
     worker_connections  1024;

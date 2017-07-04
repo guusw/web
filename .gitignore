@@ -7,7 +7,6 @@
 *.pid
 
 # Binaries, private and temporary folders
-nginx
 logs/
 letsencrypt/
 *_temp/
