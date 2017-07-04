@@ -70,6 +70,20 @@ define(`CONCAT', `$1$2')dnl
         }
     }
 
+    # Coffee git
+    server {
+        listen HTTPS_PORT;
+        server_name ~^git.COFFEE_SERVER_NAME$;
+        ssl on;
+
+        ssl_certificate ifdef(`CERT_TEST', testcrt.txt, CERTBOT_LIVE/COFFEE_SERVER_NAME/fullchain.pem);
+        ssl_certificate_key ifdef(`CERT_TEST', testkey.txt, CERTBOT_LIVE/COFFEE_SERVER_NAME/privkey.pem);
+
+        location / {
+            proxy_pass http://localhost:GITEA_PORT/;
+        }
+    }
+
     # Coffee provider
     server {
         listen HTTPS_PORT;

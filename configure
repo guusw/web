@@ -23,6 +23,7 @@ addDefine SERVER_NAME
 addDefineStr PHP_BIND
 addDefine HTTP_PORT
 addDefine HTTPS_PORT
+addDefine GITEA_PORT
 addDefine HTTP_PUBLIC_PORT
 addDefine HTTPS_PUBLIC_PORT
 addDefine HTTPS_PUBLIC_PORT_APPEND
