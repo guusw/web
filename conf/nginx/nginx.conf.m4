@@ -1,4 +1,5 @@
 worker_processes  1;
+pid ROOT_PATH/tmp/nginx.pid;
 
 events {
     worker_connections  1024;
@@ -17,8 +18,8 @@ http {
                       '\n  request_uri:   $request_uri'
                       '\n  query_string:  $query_string';
 
-    access_log  logs/access_nginx.log  main;
-    error_log logs/error_nginx.log error;
+    access_log  ROOT_PATH/logs/access_nginx.log  main;
+    error_log ROOT_PATH/logs/error_nginx.log error;
     rewrite_log on;
 
     sendfile        on;
