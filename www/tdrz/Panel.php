@@ -92,7 +92,7 @@
         {
             $file = $data_dir."/".$id.".".$ext;
             $data = [];
-            $data["url"] = generate_external_link($id);
+            $data["url"] = generate_external_link($id, $ext);
             $data["id"] = $id;
             $data["ofn"] = $ofn;
             $data["ext"] = $ext;

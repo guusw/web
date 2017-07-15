@@ -10,7 +10,7 @@
     if($url_extension !== false)
     {
         $fn = substr($file_request, 0, $url_extension);
-        $url_extension = substr($file_request, $url_extension+1);
+        $url_extension = strtolower(substr($file_request, $url_extension+1));
     }
     else
     {

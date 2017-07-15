@@ -118,7 +118,7 @@
         {
             $id = pathinfo($file, PATHINFO_FILENAME);
             $filetime = date("Y-m-d H:i:s", filemtime($file));
-            $curr_ext = pathinfo($file, PATHINFO_EXTENSION);
+            $curr_ext = strtolower(pathinfo($file, PATHINFO_EXTENSION));
             $ofn = basename($file);
             $stmt1->execute();
             $update = false;
@@ -175,7 +175,7 @@
         $original_name = $file["name"];
         $tmp_name = $file["tmp_name"];
         
-        $extension = pathinfo($original_name, PATHINFO_EXTENSION);
+        $extension = strtolower(pathinfo($original_name, PATHINFO_EXTENSION));
         $file_type = $file["type"];
         
         if($file["error"] != 0)
@@ -214,7 +214,7 @@
             move_uploaded_file($tmp_name, $dst_path);
         }
         
-        $result["url"] =  generate_external_link($dst_id);
+        $result["url"] = generate_external_link($dst_id, $extension);
         $result["id"] = $dst_id;
         $result["ofn"] = $original_name;
         $result["ext"] = $extension;

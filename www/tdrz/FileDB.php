@@ -54,6 +54,9 @@
     {
         global $result;
         $con = open_db();
+
+        // Extension should be inserted into the database as lowercase
+        $extension = strtolower($extension);
     
         $query = "SELECT upload_delay FROM tdrz_users WHERE id=?";
         $stmt = $con->prepare($query);
@@ -263,14 +266,18 @@
     }
 
     // Get the external url to access files given an id
-    function generate_external_link($id)
+    function generate_external_link($id, $ext)
     {
         global $data_sub;
         $data_sub1 = "";
         if($data_sub !== "")
             $data_sub1 = "${data_sub}.";
             
+        $append_ext = "";
+        if($ext == "gif")
+            $append_ext = ".$ext";
+
         global $server_name;
-        return format_public_uri($data_sub1.$server_name, true)."/$id";
+        return format_public_uri($data_sub1.$server_name, true)."/".$id.$append_ext;
     }
 ?>
