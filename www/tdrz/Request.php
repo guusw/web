@@ -69,7 +69,6 @@
         $file_length = filesize($file);
         
         // Set header fields
-        header($_SERVER["SERVER_PROTOCOL"]." 200 OK");
         header("Content-Type: $type");
         header("Content-Length:".$file_length);
         header("Content-Disposition: inline; filename=$ofn");
