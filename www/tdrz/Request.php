@@ -116,8 +116,13 @@
         }
         else
         {
-            //header("Accept-Ranges: bytes");
-            readfile($file);
+            $input = fopen($file, 'rb');
+            $output = fopen('php://output', 'wb');
+
+            stream_copy_to_stream($input, $output);
+
+            fclose($output);
+            fclose($input);
         }
     }
 
