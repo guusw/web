@@ -1,0 +1,9 @@
+*.conf
+*.default
+fastcgi_params
+scgi_params
+uwsgi_params
+win-utf
+mime.types
+!fastcgi.conf
+!*.m4
