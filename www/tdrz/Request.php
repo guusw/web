@@ -31,7 +31,7 @@
         
         $filter = array();
         $filter["audio/x-wav"] = "audio/wav";
-        $type = $filter[$type] ?? $type;
+        $type = isset($filter[$type]) ? $filter[$type] : $type;
         $mime_info_parts[0] = $type;
         
         return implode(";", $mime_info_parts);
