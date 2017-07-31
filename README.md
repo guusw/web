@@ -21,10 +21,12 @@ change the `run_certbot` script by adding or removing `-d <hostname>` lines, or 
 The current way these are arranged is one per root domain with subject alternative names for their subdomains.
 
 These are then referenced by their domain name in `conf/nginx/nginx.conf.m4`. This looks something like:
+
 ```m4
 ssl_certificate ifdef(`CERT_TEST', testcrt.txt, CERTBOT_LIVE/<server_name>/fullchain.pem);
 ssl_certificate_key ifdef(`CERT_TEST', testkey.txt, CERTBOT_LIVE/<server_name>/privkey.pem);
 ```
+
 where `<server_name>` is the name of the root domain inside the `run_certbot` script.
 
 The m4 ifdef allows easy switching to test certificates for offline development
@@ -44,6 +46,10 @@ The service scripts are:
 * `run_php`
 * `run_mysqld`
 * `run_nginx`
+
+Additionally script named `run` exists to start all these services at once.
+
+Gitea should be started separately from the git user (e.g. `su -c "~/git/gitea web" - git` where `~/git/gitea` is the path to the gitea executable and `git` is the username of the user running gitea)
 
 ## SSL certificates
 

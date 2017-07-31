@@ -69,7 +69,6 @@
         $file_length = filesize($file);
         
         // Set header fields
-        header($_SERVER["SERVER_PROTOCOL"]." 200 OK");
         header("Content-Type: $type");
         header("Content-Length:".$file_length);
         header("Content-Disposition: inline; filename=$ofn");
@@ -117,8 +116,13 @@
         }
         else
         {
-            //header("Accept-Ranges: bytes");
-            readfile($file);
+            $input = fopen($file, 'rb');
+            $output = fopen('php://output', 'wb');
+
+            stream_copy_to_stream($input, $output);
+
+            fclose($output);
+            fclose($input);
         }
     }
 

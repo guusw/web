@@ -114,7 +114,7 @@
                 <div class="progress_bar_inner">
                 </div>
             </div>
-            <a href="#" class="upload" onclick="popupUpload()" style="flex-basis: 400px">upload <i class="fa fa-upload"></i></a>
+            <a href="#" class="upload" onclick="popupUpload()" style="flex: 2">upload <i class="fa fa-upload"></i></a>
             <!--<a href="#" class="search">search <i class="fa fa-search"></i></a>-->
             <?php 
                 if(check_flags(UFLAG_ADMIN))
@@ -192,6 +192,22 @@ test tooltip
         document.body.removeChild(textArea);
     }
     
+    // String hash function from http://werxltd.com/wp/2010/05/13/javascript-implementation-of-javas-string-hashcode-method/
+    String.prototype.hashCode = function() 
+    {
+        var hash = 0, i, chr;
+        if (this.length === 0) 
+            return hash;
+        for (i = 0; i < this.length; i++) 
+        {
+            chr   = this.charCodeAt(i);
+            hash  = ((hash << 5) - hash) + chr;
+            hash |= 0; // Convert to 32bit integer
+        }
+        return hash;
+    };
+    
+    var placeholderImage = "Images/placeholder.png";
     var imgDropdown;
     var extraDropdown;
     var tooltip;
@@ -222,18 +238,24 @@ test tooltip
         var item = document.createElement("div");
         item.className = "img_item";
         
-        var content = "<div class=\"overlay\" style=\"top:0;\">" + imgData.ext + "</div>" +
-            "<div class=\"overlay\" style=\"bottom:0;width:100%;\">" + imgData.ofn + "</div>" +
-            "<div data-id=\"" + imgData.id + "\" data-url=\"" + imgData.url + "\" class=\"clicker\"></div>";
+        var content = "";
+        
+        content += "<div data-ofn=\"" + imgData.ofn + "\" data-id=\"" + imgData.id + "\" data-url=\"" + imgData.url + "\" class=\"clicker\"></div>";
+        content += "<div class=\"overlay\" style=\"bottom:0;width:100%;\">" + imgData.ofn + "</div>";
         
         if(imgData.thumb && imgData.thumb.length > 0)
         {
-            content += "<img src=\"" + imgData.thumb + "\"></img>";
+            content += "<div class=\"overlay\" style=\"top:0;\">" + imgData.ext + "</div>";
+            content += "<img class=\"img_thumbnail\" style=\"image-rendering:-moz-crisp-edges; image-rendering: -o-crisp-edges; image-rendering:-webkit-optimize-contrast; -ms-interpolation-mode:nearest-neighbor;\" src=\"" + placeholderImage + "\" data-src=\"" + imgData.thumb + "\"></img>";
         }
         else
         {
-            content += "<div class=\"no_thumb\"></div>";
+            // Generate color based on extension
+            var extColorHue = (imgData.ext.hashCode()+100) % 256;
+            var extColor = "hsl("+extColorHue+",70%,60%)";
+            content += "<div class=\"no_thumb\"><div style=\"color:" + extColor + "\">." + imgData.ext + "</div></div>";
         }
+        
         item.innerHTML = content;
         
         // Setup the imgDropdown menu for the item
@@ -289,8 +311,7 @@ test tooltip
         
         clicker.onmouseenter = function(e)
         {
-            var nameOverlay = this.parentNode.getElementsByClassName("overlay")[1];
-            tooltip.textContent = nameOverlay.textContent;
+            tooltip.textContent = this.parentNode.getElementsByClassName("clicker")[0].dataset.ofn;
         }
         clicker.onmousemove = function(e)
         {
@@ -497,6 +518,35 @@ test tooltip
         xhr.send(data);
     }
     
+    function loadNewThumbnails()
+    {
+        var items = document.getElementsByClassName('img_thumbnail');
+        for(var i = 0; i < items.length; i++)
+        {
+            /* offsetParent may not be the body if the element container is positioned. Therefore we need to find the distance from the body by adding all the offsetTop's of all offsetParent's.  */
+            var offsetParentTop = 0;
+            var temp = items[i];
+            do
+            {
+                if(!isNaN(temp.offsetTop))
+                {
+                    offsetParentTop += temp.offsetTop;
+                }
+            }while(temp = temp.offsetParent)
+            var pageYOffset = window.pageYOffset;
+            var viewportHeight = window.innerHeight;      
+            if(offsetParentTop > pageYOffset && offsetParentTop < pageYOffset + viewportHeight)
+            {
+                var clicker = items[i].parentNode.getElementsByClassName('img_thumbnail')[0];
+                if(items[i].attributes.src.nodeValue == placeholderImage)
+                {
+                    console.log(clicker.dataset.id + " is visible");
+                    items[i].src = clicker.dataset.src;
+                }
+            }
+        }
+    }
+    
     window.onload = function()
     {
         // Setup drop zone for uploader
@@ -543,6 +593,12 @@ test tooltip
         
         // Add initial items
         <?php generate_image_list(); ?>
+        
+        // Setup thumbnail lazy loading
+        window.addEventListener("resize", loadNewThumbnails, false);
+        window.addEventListener("scroll", loadNewThumbnails, false);
+        
+        loadNewThumbnails();
     };
     window.onclick = function(e) 
     {
