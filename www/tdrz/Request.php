@@ -23,7 +23,20 @@
         echo "Invalid range";
         exit(0);
     }
-
+    
+    function filter_file_type($mime_info)
+    {
+        $mime_info_parts = explode(";", $mime_info);
+        $type = $mime_info_parts[0];
+        
+        $filter = array();
+        $filter["audio/x-wav"] = "audio/wav";
+        $type = $filter[$type] ?? $type;
+        $mime_info_parts[0] = $type;
+        
+        return implode(";", $mime_info_parts);
+    }
+    
     function serve_file($file, $ofn)
     {
         // Don't send php errors in the file stream
@@ -31,7 +44,7 @@
         
         // retreive mime type from file
         $fi = new finfo(FILEINFO_MIME);
-        $type = $fi->file($file);
+        $type = filter_file_type($fi->file($file));
         
         if(strpos($type, "text/") !== false)
         {
@@ -56,8 +69,7 @@
         $file_length = filesize($file);
         
         // Set header fields
-        header($_SERVER["SERVER_PROTOCOL"] . " 200 OK");
-        //header("Cache-Control: public"); // needed for i.e.
+        header($_SERVER["SERVER_PROTOCOL"]." 200 OK");
         header("Content-Type: $type");
         header("Content-Length:".$file_length);
         header("Content-Disposition: inline; filename=$ofn");
@@ -78,7 +90,6 @@
                 $matches = [];
                 if(!preg_match("#([0-9]*)-([0-9]*)#", $range, $matches))
                     range_request_failure();
-                //var_dump($matches);
                 
                 $range_start = (strlen($matches[1]) == 0) ? 0 : intval($matches[1]);
                 $range_end = (strlen($matches[2]) == 0) ? ($file_length-1) : intval($matches[2]);
