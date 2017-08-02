@@ -24,13 +24,23 @@ fi
 
 case $1 in
 "start")
+    if [ -f $MyPath/logs/nginx.pid ]
+    then
+        echo "Nginx already running"
+        exit 1
+    fi
     "$Nginx" -p $ROOT_PATH -c $NGINX_CONFIG_PATH 
     ;;
 "stop")
     "$Nginx" -p $ROOT_PATH -c $NGINX_CONFIG_PATH -s stop
     ;;
 "reload" | "restart")
-    "$Nginx" -p $ROOT_PATH -c $NGINX_CONFIG_PATH -s reload
+    if [ -f $MyPath/logs/nginx.pid ]
+    then
+        "$Nginx" -p $ROOT_PATH -c $NGINX_CONFIG_PATH -s reload
+    else
+        "$Nginx" -p $ROOT_PATH -c $NGINX_CONFIG_PATH
+    fi
     ;;
 *)
     echo "Unknown action $1"
