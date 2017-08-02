@@ -1,0 +1,365 @@
+@border: #00e8ff;
+@border_projects: #fff;
+@background_header: #000;
+@shadow_header: lighten(@background_header, 30%);
+@background: #606060;
+@foreground: #ffffff;
+
+body
+{
+    background-color: @background;
+    color: @foreground;
+    font-family: "Segoe UI", "Lucida Sans Unicode", "Lucida Grande", sans-serif;
+    margin: 0;
+    margin-bottom: 60px;
+    overflow-y: scroll;
+}
+
+.shadowed(@distance: 5px)
+{
+    box-shadow: @distance @distance @shadow_header;
+}
+
+.bordered(@border_color: @border)
+{
+    border: 3px solid @border_color;
+    border-radius: 2px;
+}
+
+.bordered_square(@border_color)
+{
+    border: 1px solid @border_color;
+}
+
+#header
+{
+    margin: 0;
+    width: 100%;
+    background-color: @background_header;
+    .shadowed
+}
+
+#title
+{   
+    display: inline-block;
+    font-size: 40px;
+    padding:0px;
+}
+
+#subtitle
+{
+    padding:0px;
+    font-size: 20px;
+    color: darken(@foreground, 40%);
+}
+
+#header table
+{
+    padding: 10px;
+    width: 100%;
+    table-layout: fixed;
+}
+
+
+/* Button Bar elements */
+.button_bar 
+{ 
+    white-space:normal;
+    float: right;
+}
+
+.main_image
+{
+    float:left;
+    padding: 5px;
+    position:relative;
+    vertical-align: middle; 
+    text-align: center; 
+    .bordered;
+}
+
+.button 
+{
+    float:left;
+    color: @foreground;
+    text-decoration: none;
+    padding: 20px 20px;
+    margin-left: 5px;
+    margin-right: 5px;
+    min-width: 100px;
+    position:relative;
+    vertical-align: middle; 
+    text-align: center; 
+    font-size: 20px;
+    .bordered;
+}
+
+/* Main Content Box */
+.content
+{
+    margin: 4% 5% 2.5% 5%;
+    margin-left: auto;
+    margin-right: auto;
+    max-width: 1000px;
+    padding: 1.5% 2%;
+    background-color: darken(@background, 20%);
+    z-index: 0;
+    .bordered;
+}
+
+/* Content style(h1,2,3) sizes, margins, etc */
+.content .indent
+{
+    left: 1em;
+    position: relative;
+}
+
+.sub
+{
+    font-size: 80%;
+    left: 1em;
+    position: relative;
+}
+
+.content h1
+{
+    margin: 10px 0;
+}
+
+.content h3
+{
+    margin: 10px 0;
+}
+
+.content h4
+{
+    margin: 5px 0;
+}
+
+/* A horizontal split that divides an area equaly in 2 */
+.content table
+{
+    width: 100%;
+    table-layout: fixed;
+}
+
+.content .main_split
+{
+    width: 100%;
+}
+
+.content .main_split td
+{
+    vertical-align: top;
+}
+
+/* Project list CSS */
+.project_list
+{
+    margin: 10px;
+    padding: 0;
+    position: relative;
+    overflow: hidden;
+    background-color: @background_header;
+    .shadowed;
+    .bordered(@border_projects);
+}
+
+.project_item
+{
+    float: left;
+    position: relative;
+    width: 150px;
+    height: 150px;
+    overflow: hidden;
+    text-decoration: none;
+    color: @foreground;
+    .bordered_square(@border_projects);
+}
+
+.project_title
+{
+    z-index: 10;
+    padding: 3px;
+    padding-left: 5px;
+    padding-bottom: 5px;
+    position: absolute;
+    left: 0%;
+    bottom: 0%;
+    right: 0%;
+    font-size: 14px;
+}
+
+.project_bgbar
+{
+    z-index: 8;
+    position: absolute;
+    background-color: black;
+    opacity: 0.7;
+    bottom: 0%;
+    left: 0%;
+    right: 0%;
+    height: 19%;
+}
+
+.project_item img
+{
+    z-index: 5;
+    position: absolute;
+    width: 100%;
+    height: 100%;
+}
+
+.project_eye
+{
+    z-index: 10;
+    position: absolute;
+    right: 4%;
+    bottom: 4%;
+    opacity: 0.5;
+}
+
+/* Project container CSS */
+.project_container
+{
+    margin: 10px;
+    position: relative;
+    border: 2px solid;
+    border-radius: 2px;
+    overflow: hidden;
+    background-color: @background_header;
+    display:none;
+    .shadowed;
+}
+
+.project_container .indent
+{
+    margin: 20px;
+}
+
+.project_container .title
+{
+    text-align: center;
+    font-size: 30px;
+    padding: 5px;
+    width:100%;
+    background-color: @background;
+}
+
+.project
+{
+    position:relative;
+    top: 0%;
+    right: 0%;
+    left: 0%;
+    bottom: 0%;
+}
+
+.project_image_frame
+{ 
+    border: 2px solid #73AD21;
+    border-radius: 10px;
+    overflow: hidden;
+    width: 25vw;
+    height: 25vw;
+    margin: auto;
+    position: relative;
+    background-color: black;
+}
+
+.project_details ul
+{
+    margin: 0;
+}
+
+.project_details td
+{
+    vertical-align: top;
+}
+
+/* Footer styling with text and icon size */
+#footer
+{
+    font-size: 12px;
+    text-align: center;
+    color: #ffffff;
+    letter-spacing: 2px;
+}
+
+#footer div
+{
+    margin: 5px;
+}
+
+#footer a
+{
+    font-size: 32px;
+    text-decoration: none;
+    color: #ffffff;
+}
+
+@media screen and (max-width: 99999px)
+{
+    body
+    {
+        font-size: 1em;
+    }
+    .project_list
+    {
+        width: 760px;
+    }
+}
+
+/* Smartphone :> */
+@media screen and (max-width: 992px)
+{
+    body
+    {
+        font-size: 0.95em;
+    }
+    .content
+    {
+        border-left: none;
+        border-right: none;
+        border-radius: 0px;
+    }
+    .project_list
+    {
+        width: 456px;
+    }
+    .button
+    {
+        display:block;
+        float: none;
+        border-top-width: 1.5px;
+        border-bottom-width: 1.5px;
+    }
+}
+
+@media screen and (max-width: 892px)
+{
+    body
+    {
+        font-size: 0.9em;
+    }
+}
+
+@media screen and (max-width: 792px)
+{
+    body
+    {
+        font-size: 0.85em;
+    }
+    table
+    {
+        font-size: 0.75em;
+    }
+}
+
+@media screen and (max-width: 792px)
+{
+    .project_list
+    {
+        width: 304px;
+    }
+}
