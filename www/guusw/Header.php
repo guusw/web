@@ -17,15 +17,18 @@
                 <span id="subtitle">Video Game Programmer</span>
             </td><td>
                 <div class="button_bar">
-                    <a href="?page_id=2" class="button">
-                        Projects
-                    </a>
-                    <a href="?page_id=0" class="button">
-                        About me
-                    </a>
-                    <a href="?page_id=1" class="button">
-                        CV
-                    </a>
+                    <button class="dropdown_button"><i class="fa fa-bars" aria-hidden="true"></i></button>
+                    <div class="button_bar_content">
+                        <a href="?page_id=2">
+                            Projects
+                        </a>
+                        <a href="?page_id=0">
+                            About me
+                        </a>
+                        <a href="?page_id=1">
+                            CV
+                        </a>
+                    </div>
                 </div>
             </td>
             </tr>

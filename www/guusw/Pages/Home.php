@@ -36,17 +36,20 @@
             <div class="desc">
                 <p>
                 Hello, my name is Guus Waals.<br/>
-                I just graduated as a programmer at the NHTV University in Breda, The Netherlands.</p>
+                I just graduated for International Game Architecture and Design (IGaD) at NHTV in Breda, The Netherlands.</p>
                 <p>
-                I have been programming for about 5 years and have always had an interest in video games, their technical details and how computers work.
+                Since I was young I was always playing with computers and other electronic devices, figuring out how they work, disassembling them and putting them back together.<br>
+                When I came into contact with video games I was always wondering how they worked and wanted to create them myself.
                 <p>
-                When I started off, I did mostly graphics programming using SDL, OpenGL and DirectX libraries, creating rendering frameworks in C++.
-                This helped me to become familiar with C++ in both 2D and 3D rendering.</br>
-                Besides graphics programming, the last 3 years I have also enjoyed working on other subjects that are useful in video game development, such as: 
-                Software Audio Mixing, Physics Simulation, Data Driven engines, Tools, GUI systems and also Gameplay and AI programming.
+                I really started programming at around the age of 16, I mostly worked with SDL, OpenGL and DirectX together with C++ figuring out how games get their graphics on the screen and trying to do so myself.
+                This helped me become familiar with C++ and various 2D and 3D rendering techniques.
                 </p>
                 <p>
-                Feel free to contact me by LinkedIn, GitHub or e-mail.
+                I decided to follow the IGaD course after finishing high school. Here, I have enjoyed working on various subjects related to video game development, such as: 
+                Software Audio Mixing, Physics Simulation, Data Driven engines, Tools, GUI systems, AI and Gameplay programming.
+                </p>
+                <p>
+                Feel free to contact me through LinkedIn, GitHub or e-mail.
                 </p>
             </div>
             <div class="main_image">

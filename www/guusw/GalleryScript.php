@@ -1,4 +1,3 @@
-<link rel="stylesheet" type="text/css" href="Style/Gallery.css">
 <script>
     var gallery_data = [];
     function create_gallery(id)

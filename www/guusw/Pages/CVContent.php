@@ -24,7 +24,7 @@
                         <td>E-mail:</td><td>guus_waals@live.nl</td>
                     </tr>
                     <tr>
-                        <td>Portfolio:</td><td>http://guusw.nl</td>
+                        <td>Website:</td><td>https://guusw.nl</td>
                     </tr>
                 </table>
             </div>
@@ -60,8 +60,7 @@
         Fluent English (Professional working experience).<br/>
         Basic Japanese understanding (words from N5, N4 and N3)<br/>
     <h4>Programming languages</h4>
-        C++ (~5 years of experience).
-        C# (~3 years of experience).
+        I Primarily worked in team projects with C++ and C#<br/>
         I have also worked with C, Nim, Python, JavaScript, PHP, bash/sh and x86/x64/ARM assembly.<br/>
     <h4>Graphics programming</h4>
         DirectX 9/11, OpenGL, GX2 (Wii U), GLSL, HLSL, CUDA, OpenCL
