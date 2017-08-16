@@ -1,6 +1,6 @@
 <meta name="title" content="Xenko">
 <meta name="image" content="Images/xenko.png">
-<meta name="index" content=10>
+<meta name="index" content=0>
 <meta name="lang" content="C#, C++">
 <meta name="platform" content="PC, Linux, XBox, Android, iOS">
 <meta name="tools" content="Microsoft Visual Studio 2015, Microsoft Visual Studio 2017">

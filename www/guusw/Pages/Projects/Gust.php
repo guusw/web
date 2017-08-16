@@ -1,6 +1,6 @@
 <meta name="title" content="Gust">
 <meta name="image" content="Images/gust.png">
-<meta name="index" content=0>
+<meta name="index" content=1>
 <meta name="lang" content="C#">
 <meta name="platform" content="Android">
 <meta name="tools" content="Microsoft Visual Studio 2013, Unity 3D">
