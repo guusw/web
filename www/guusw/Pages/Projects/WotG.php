@@ -12,7 +12,7 @@ We joined the GGJ site at our university, NHTV in Breda. We won the 2nd place fo
 After the jam, we decided that this game has potential and decided to polish it and aim for a Steam Greenlight release.</p>
 <p>Most of my work on this game during the game jam consisted of testing, implementing game mechanics and implementing graphical/audio/haptic feedback. After the game jam I wrote an AI for the single player game mode. Additionally this project allowed me to work with the steamworks API's and tools in order to release a game on steam.</p>
 <p>
-The game is available now on steam at <a href=http://store.steampowered.com/app/503960/>http://store.steampowered.com/app/503960/</a></br>
+The game is  now available on steam at <a href=http://store.steampowered.com/app/503960/>http://store.steampowered.com/app/503960/</a></br>
 You can also check the official website at: <a href=http://www.willofthegods.com/>http://www.willofthegods.com/</a></br>
 </p>
 <?php $gallery_path = "Videos/wotg.mp4,Videos/wotgai.mp4,Images/WotG"; require "Gallery.php"; ?>
