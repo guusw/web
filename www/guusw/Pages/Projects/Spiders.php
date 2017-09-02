@@ -12,4 +12,4 @@ The player then controls a rope on the screen between his two hands and has to b
 
 <p>My job on this project was mainly figuring out the rendering pipeline of the engine we were working with. I wrote some custom shaders and assisted the artists and designers with moving their assets into the game. This project also gave me the chance to research some native PS4 features not in the engine such as trophies and find out how a game is built and packaged for PS4 consoles and test kits.
 
-<?php $gallery_path = "Videos/spiders.mp4"; require "Gallery.php"; ?>
+<?php $gallery_path = "Videos/spiders.webm"; require "Gallery.php"; ?>

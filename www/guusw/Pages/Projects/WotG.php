@@ -15,4 +15,4 @@ After the jam, we decided that this game has potential and decided to polish it 
 The game is available now on steam at <a href=http://store.steampowered.com/app/503960/>http://store.steampowered.com/app/503960/</a></br>
 You can also check the official website at: <a href=http://www.willofthegods.com/>http://www.willofthegods.com/</a></br>
 </p>
-<?php $gallery_path = "Videos/wotg.mp4,Videos/wotgai.mp4,Images/WotG"; require "Gallery.php"; ?>
+<?php $gallery_path = "Videos/wotg.webm,Videos/wotgai.webm,Images/WotG"; require "Gallery.php"; ?>

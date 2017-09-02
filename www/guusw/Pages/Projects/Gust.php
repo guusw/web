@@ -16,4 +16,4 @@
 </a></center>
 </br>
 
-<?php $gallery_path = "Videos/gust.mp4"; require "Gallery.php"; ?>
+<?php $gallery_path = "Videos/gust.webm"; require "Gallery.php"; ?>

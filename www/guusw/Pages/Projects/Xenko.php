@@ -24,4 +24,4 @@ I helped to complete this feature and it is now available in the released versio
 During this project I learned a lot about the inner workings of a game engine and it's tools.
 </p>
 
-<?php $gallery_path = "Videos/xenkonav.mp4,Videos/xenkols.mp4"; require "Gallery.php"; ?>
+<?php $gallery_path = "Videos/xenkonav.webm,Videos/xenkols.webm"; require "Gallery.php"; ?>

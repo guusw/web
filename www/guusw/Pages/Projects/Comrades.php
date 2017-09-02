@@ -15,4 +15,4 @@ The game uses an augmented reality library to project the game on a surface with
 <a href="http://globalgamejam.org/2015/games/stacking-comrades">Global Game Jam site</a>
 </p>
 
-<?php $gallery_path = "Images/Comrades,Videos/comrades.mp4"; require "Gallery.php"; ?>
+<?php $gallery_path = "Images/Comrades,Videos/comrades.webm"; require "Gallery.php"; ?>
