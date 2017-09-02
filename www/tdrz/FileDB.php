@@ -272,14 +272,11 @@
         $data_sub1 = "";
         if($data_sub !== "")
             $data_sub1 = "${data_sub}.";
-        
-        $required_extensions = array();
-        $required_extensions["gif"] = "gif";
-        
+            
         $append_ext = "";
-        if(isset($required_extensions[$ext]))
+        if($ext == "gif")
             $append_ext = ".$ext";
-        
+
         global $server_name;
         return format_public_uri($data_sub1.$server_name, true)."/".$id.$append_ext;
     }

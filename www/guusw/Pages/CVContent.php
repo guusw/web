@@ -80,19 +80,12 @@
     <!-- Projects -->
     <h3>Projects</h3>
     <div class="indent">
-    <h4>Path tracer</h4>
-        Platform: Windows<br/>
-        Languages: C++/CUDA<br/>
-        Location: NHTV, The Netherlands<br/>
-        Summary: I developed a Path Tracer, it features bounding volume hierarchies, soft shadows, reflection and refraction of light.
-    <h4>HAXIS</h4>
-        Platform: Windows/PS4<br/>
-        Engine: Unreal Engine 4<br/>
-        Language: C++<br/>
-        Location: NHTV, The Netherlands<br/>
-        Summary: This is a project I worked on during the full 3rd year of my study. I worked in a team of</br>
-        approximately 20 people, creating a MOBA-style game. For this project I designed and wrote gameplay elements, </br>
-        programmed the GUI and the network lobby system.
+    <h4>Xenko</h4>
+        Platform: Windows/Linux/Android/iOS/XBox<br/>
+        Languages: C#/C++<br/>
+        Location: Silicon Studio Corp., Japan<br/>
+        Summary: During a one year internship I assisted development on the game engine Xenko. <br/>
+        I worked on product demos, new rendering features, integration of third party libraries and writing/changing editor functionality. <br/>
     <h4>Will of the Gods</h4>
         Platform: Windows <br/>
         Engine: Unreal Engine 4<br/>
@@ -101,13 +94,14 @@
         Summary: Together with 5 other students we developed this game for the Global Game Jam, <br/>
         later we worked on improving the game and released it on Steam store in August. <br/>
         I worked on effects/visual feedback, the AI and gameplay mechanics for the game.<br/>
-    <h4>Xenko</h4>
-        Platform: Windows/Linux/Android/iOS/XBox<br/>
-        Languages: C#/C++<br/>
-        Location: Silicon Studio Corp., Japan<br/>
-        Summary: During a one year internship I assisted development on the game engine Xenko. <br/>
-        I worked on product demos, new rendering features, integration of third party libraries and writing/changing editor functionality.
-    <br/>
+    <h4>HAXIS</h4>
+        Platform: Windows/PS4<br/>
+        Engine: Unreal Engine 4<br/>
+        Language: C++<br/>
+        Location: NHTV, The Netherlands<br/>
+        Summary: This is a project I worked on during the full 3rd year of my study. I worked in a team of</br>
+        approximately 20 people, creating a MOBA-style game. For this project I designed and wrote gameplay elements, </br>
+        programmed the GUI and the network lobby system.
     </div>
 </div>
 </div>
