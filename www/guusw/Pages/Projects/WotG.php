@@ -13,6 +13,5 @@ After the jam, we decided that this game has potential and decided to polish it 
 <p>Most of my work on this game during the game jam consisted of testing, implementing game mechanics and implementing graphical/audio/haptic feedback. After the game jam I wrote an AI for the single player game mode. Additionally this project allowed me to work with the steamworks API's and tools in order to release a game on steam.</p>
 <p>
 The game is  now available on steam at <a href=http://store.steampowered.com/app/503960/>http://store.steampowered.com/app/503960/</a></br>
-You can also check the official website at: <a href=http://www.willofthegods.com/>http://www.willofthegods.com/</a></br>
 </p>
 <?php $gallery_path = "Videos/wotg.webm,Videos/wotgai.webm,Images/WotG"; require "Gallery.php"; ?>
