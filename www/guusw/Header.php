@@ -19,14 +19,11 @@
                 <div class="button_bar">
                     <button class="dropdown_button"><i class="fa fa-bars" aria-hidden="true"></i></button>
                     <div class="button_bar_content">
-                        <a href="?page_id=2">
+                        <a href="?page_id=1">
                             Projects
                         </a>
                         <a href="?page_id=0">
                             About me
-                        </a>
-                        <a href="?page_id=1">
-                            CV
                         </a>
                     </div>
                 </div>

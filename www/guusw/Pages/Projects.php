@@ -47,18 +47,9 @@
                     echo "</a>";
                 }
             ?>
-            <!--
-            <a href="#" class="project_item">
-                <img src="Images/img0.png"></img>
-                <div class="project_title">Raytracer</div>
-            </a>
-            -->
         </div>
-    </div></center> 
-    
-    <script>
-        
-    </script>
+    </div>
+    </center> 
     
     <div class="project_container">
         <?php
@@ -111,6 +102,28 @@
             {
                 return id >= 0 && id < items.length;
             }
+            function set_item_blur(item, on)
+            {
+                var img = item.getElementsByTagName("img")[0];
+                var blur_amt = 5;
+                if(on)
+                {
+                    img.style.webkitFilter = "blur(" + blur_amt + "px) grayscale(50%)";
+                    img.style.filter = "blur(" + blur_amt + "px) grayscale(50%)";
+                }
+                else
+                {
+                    img.style.filter = "none";
+                    img.style.webkitfilter = "none";
+                }
+            };
+            function update_item_blur(selected)
+            {
+                for(var i = 0; i < items.length; i++)
+                {
+                    set_item_blur(items[i], items[i] != selected && items[i] != selectedProject);
+                }
+            }
             function set_eye(base, selected)
             {
                 var eye = base.getElementsByClassName("project_eye")[0];
@@ -126,6 +139,7 @@
                     eye.style.opacity = "0.5";
                 }
             }
+            
             for(var i = 0; i < items.length; i++)
             {
                 items[i].addEventListener("click", function()
@@ -135,19 +149,16 @@
                         set_eye(selectedProject, false);
                     }
                     set_eye(this, true);
+                    update_item_blur(this);
                 }); 
+                
                 items[i].onmouseover = function()
                 {
-                    var img = this.getElementsByTagName("img")[0];
-                    var blur_amt = 5;
-                    img.style.webkitFilter = "blur(" + blur_amt + "px) grayscale(50%)";
-                    img.style.filter = "blur(" + blur_amt + "px) grayscale(50%)";
+                    update_item_blur(this);
                 };
                 items[i].onmouseleave = function()
                 {
-                    var img = this.getElementsByTagName("img")[0];
-                    img.style.webkitFilter = "none";
-                    img.style.filter = "none";
+                    update_item_blur(null);
                 };
             }
         
@@ -181,8 +192,8 @@
                         set_eye(eye_button, true);
                         show_project(id);
                     }
-                    
                 }
+                update_item_blur();
             });
             function show_project_p(p)
             {

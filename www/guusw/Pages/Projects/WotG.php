@@ -6,7 +6,7 @@
 <meta name="tools" content="Unreal Engine, Microsoft Visual Studio 2015, Steamworks">
 <meta name="duration" content="3 days + work from Jan-Sep on steam release">
 </head>
-<p>Together with the same team as for the <a href="#project_6" onclick="show_project1(6)">Stacking Comrades</a> project, we made this game during the Global Game Jam (GGJ) 2016 in 3 days.<br>
+<p>Together with the same team as for the <a href="#project_1" onclick="show_project1(1)">Stacking Comrades</a> project, we made this game during the Global Game Jam (GGJ) 2016 in 3 days.<br>
 I was in a team together with 2 other programmers, 2 designers and 1 artist.
 We joined the GGJ site at our university, NHTV in Breda. We won the 2nd place for the best game at our school, and also won the people's choice award.
 After the jam, we decided that this game has potential and decided to polish it and aim for a Steam Greenlight release.</p>

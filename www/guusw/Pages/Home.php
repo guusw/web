@@ -8,6 +8,7 @@
 .about .desc
 {
     flex: 3;
+    padding-right: 1em;
 }
 @media screen and (max-width: 600px)
 {

@@ -1,7 +1,7 @@
 <?php require 'Header.php';?>   
 <div class="content">
 <?php
-    $pages = array("Home.php", "CV.php", "Projects.php");
+    $pages = array("Home.php", "Projects.php");
     function insert_page($pid)
     {
         global $pages;
@@ -10,7 +10,7 @@
     if(array_key_exists('page_id', $_REQUEST))
         $pid = $_REQUEST['page_id'];
     else
-        $pid = 2;
+        $pid = 1;
     if($pid >= count($pages) || $pid < 0 || !is_numeric($pid))
     {
         echo 'Invalid Page ID '.$pid;
