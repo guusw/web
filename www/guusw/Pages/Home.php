@@ -47,7 +47,7 @@
                 </p>
                 <p>
                 I decided to follow the IGaD course after finishing high school. Here, I have enjoyed working on various subjects related to video game development, such as: 
-                Software Audio Mixing, Physics Simulation, Data Driven engines, Tools, GUI systems, AI and Gameplay programming.
+                Software Audio Mixing, Software Rasterization, Raytracing, Physics Simulation, Game Engine Architecture, Tools, GUI systems, AI and Gameplay programming.
                 </p>
                 <p>
                 Feel free to contact me through LinkedIn, GitHub or e-mail.
