@@ -274,7 +274,7 @@
             $data_sub1 = "${data_sub}.";
             
         $append_ext = "";
-        if($ext == "gif")
+        if($ext == "gif" || $ext == "webm")
             $append_ext = ".$ext";
 
         global $server_name;
