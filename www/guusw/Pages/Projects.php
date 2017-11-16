@@ -18,6 +18,9 @@
         $projects = array();
         foreach($dit as $fileInfo)
         {
+            if($fileInfo->getExtension() !== "php")
+                continue;
+
             $p = $dit->getPath()."/".$fileInfo->getFilename();
             $meta = get_meta_tags($p);
             
