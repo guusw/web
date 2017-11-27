@@ -37,7 +37,7 @@
             <div class="desc">
                 <p>
                 Hello, my name is Guus Waals.<br/>
-                I just graduated for International Game Architecture and Design (IGaD) at NHTV in Breda, The Netherlands.</p>
+                I just graduated for International Game Architecture and Design (IGAD) at NHTV in Breda, The Netherlands.</p>
                 <p>
                 Since I was young I was always playing with computers and other electronic devices, figuring out how they work, disassembling them and putting them back together.<br>
                 When I came into contact with video games I was always wondering how they worked and wanted to create them myself.
@@ -46,7 +46,7 @@
                 This helped me become familiar with C++ and various 2D and 3D rendering techniques.
                 </p>
                 <p>
-                I decided to follow the IGaD course after finishing high school. Here, I have enjoyed working on various subjects related to video game development, such as: 
+                I decided to follow the IGAD course after finishing high school. Here, I have enjoyed working on various subjects related to video game development, such as: 
                 Software Audio Mixing, Software Rasterization, Raytracing, Physics Simulation, Game Engine Architecture, Tools, GUI systems, AI and Gameplay programming.
                 </p>
                 <p>
