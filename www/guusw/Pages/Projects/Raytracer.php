@@ -7,8 +7,8 @@
 <meta name="duration" content="10 weeks">
 </head>
 
-<p>This is a path tracer I made to render a scene with accurate reflections, reflections and in other ways simulate the behaviour of light.</p>
-<p>This was one of the most fun projects I did, and at the time I never heard of the concept of raytracing before. After making a basic raytracer, I also added Monte Carlo sampling to increase the quality and accuracy of the shadows and to simulate light bouncing.</br>
+<p>This is a path tracer I made to render a scene with accurate reflections and in other ways simulate the behaviour of light.</p>
+<p>This was one of the most fun projects I did and at the time I never heard of the concept of raytracing. After making a basic raytracer, I also added Monte Carlo sampling to increase the quality and accuracy of the shadows and to simulate light bounces.</br>
 During this I also experimented with GPU-acceleration and decided to implement my final version in CUDA which provides a pretty big speed-up for parallel tasks like ray/path tracing.</br>
 I wanted to add different shapes than just spheres and cubes so I did some research about Bounding Volume Hierarchies and implemented that in my path tracer to load and display scenes loaded from .obj files.</p>
 <p>Below are some images that took about 1 minute to render each.</p>
