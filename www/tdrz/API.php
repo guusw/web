@@ -49,13 +49,13 @@
         
         if(!isset($_REQUEST["key"]))
         {
-            api_return(1);
+            api_return(API_INVALID_KEY);
         }
         
         $user_info = get_user($_REQUEST["key"]);
         if(count($user_info) == 0)
         {
-            api_return(1);
+            api_return(API_INVALID_KEY);
         }
         
         return $user_info;
@@ -71,7 +71,7 @@
         global $data_dir;
         
         if(!check_flags(UFLAG_ADMIN))
-            api_return(5);
+            api_return(API_ACCESS_DENIED);
         
         $tdir = "$data_dir/thumbs/*.jpg";
         $thumbs = glob($tdir);
@@ -93,7 +93,7 @@
         global $user_info;
         
         if(!check_flags(UFLAG_ADMIN))
-            api_return(5);
+            api_return(API_ACCESS_DENIED);
         
         // Default assigned file owner
         $default_owner = 0;
@@ -181,7 +181,7 @@
         if($file["error"] != 0)
         {
             $result["error"] = $file["error"];
-            api_return(4);
+            api_return(API_UNKOWN_COMMAND);
         }
         
         $dst_id = generate_filename($data_dir);
@@ -210,7 +210,7 @@
         {
             // Upload a new file
             if(!register_file($dst_id, $hash, $extension, $original_name, $user_info["id"]))
-                api_return(3);
+                api_return(API_UPLOAD_ERROR);
             move_uploaded_file($tmp_name, $dst_path);
         }
         
@@ -228,14 +228,14 @@
         global $user_info;
         if(!isset($_POST["id"]))
         {
-            api_return(2);
+            api_return(API_DB_ERROR);
         }
         
         $id = $_POST["id"];
         $file_info = find_file($_POST["id"]);
         if(count($file_info) == 0)
         {
-            api_return(2);
+            api_return(API_DB_ERROR);
         }
         $ext = $file_info["extension"];
         $file = "$data_dir/$id.$ext";
@@ -247,7 +247,7 @@
         if(!deregister_file($id, $user_info["id"]))
         {
             $result["error"] = "deregister_file Failed";
-            api_return(2);
+            api_return(API_DB_ERROR);
         }
         api_return(0);
     }
@@ -272,7 +272,7 @@
                 if(!isset($_FILES["file"]))
                 {
                     $result["error"] = "No \"file\" parameter provided";
-                    api_return(3);
+                    api_return(API_UPLOAD_ERROR);
                 }
 
                 $file = $_FILES["file"];
@@ -290,11 +290,11 @@
             {
                 if(!isset($_POST["id"]))
                 {
-                    api_return(2);
+                    api_return(API_DB_ERROR);
                 }
                 remove_file($_POST["id"]);
             }
         }
     }
-    api_return(4);
+    api_return(API_UNKOWN_COMMAND);
 ?>
