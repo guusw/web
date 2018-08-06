@@ -40,6 +40,8 @@
 
     function require_key()
     {
+        global $result;
+        
         // Try to get user from current session first
         session_start();
         if(isset($_SESSION["user_info"]))
@@ -47,12 +49,18 @@
             return $_SESSION["user_info"];
         }
         
-        if(!isset($_REQUEST["key"]))
+        $key = "";
+        if(isset($_REQUEST["key"]))
         {
+            $key = $_REQUEST["key"];
+        }
+        else 
+        {
+            $result["error"] = "Key required but not specified";
             api_return(API_INVALID_KEY);
         }
         
-        $user_info = get_user($_REQUEST["key"]);
+        $user_info = get_user($key);
         if(count($user_info) == 0)
         {
             api_return(API_INVALID_KEY);
@@ -180,8 +188,10 @@
         
         if($file["error"] != 0)
         {
-            $result["error"] = $file["error"];
-            api_return(API_UNKOWN_COMMAND);
+            var_dump($file);
+            
+            $result["error"] = sprintf("File upload error: %s", $file["error"]);
+            api_return(API_UPLOAD_ERROR);
         }
         
         $dst_id = generate_filename($data_dir);
