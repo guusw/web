@@ -5,6 +5,7 @@
 Hello :>
 </div>
 <script>
+    // @license magnet:?xt=urn:btih:1f739d935676111cfff4b4693e3816e664797050&dn=gpl-3.0.txt GPL-v3-or-Later
     var content = document.getElementById("content");
     var original_data = content.innerText;
     content.innerHTML = "";
@@ -32,4 +33,5 @@ Hello :>
         visible = !visible;
         blink.style.visibility = visible ? "visible" : "hidden";
     }, 500);
+    // @license-end
 </script>
