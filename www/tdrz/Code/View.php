@@ -75,11 +75,12 @@
         $extension = pathinfo($full_path, PATHINFO_EXTENSION);
         
         // Read file
-        $data_formatted =  htmlspecialchars(file_get_contents("$full_path"));
-        
+        $file_contents = file_get_contents("$full_path");
         // Remove possible BOM
-        $data_formatted = str_replace("\xEF\xBB\xBF",'',$data_formatted);
-        
+        $file_contents = str_replace("\xEF\xBB\xBF",'',$file_contents);
+
+        $data_formatted =  htmlentities("$file_contents");
+
         function get_friendly_name()
         {
             global $fn, $friendly_name;

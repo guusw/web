@@ -37,15 +37,18 @@
         return implode(";", $mime_info_parts);
     }
     
-    function serve_file($file, $ofn)
+    function serve_file($file, $file_info)
     {
+        $ofn = $file_info["ofn"];
+        $ext = $file_info["extension"];
+
         // Don't send php errors in the file stream
         ini_set('display_errors', '0');
         
         // retreive mime type from file
         $fi = new finfo(FILEINFO_MIME);
         $type = filter_file_type($fi->file($file));
-        
+
         if(strpos($type, "text/") !== false)
         {
             // Is code/text viewing enabled
@@ -71,7 +74,7 @@
         // Set header fields
         header("Content-Type: $type");
         header("Content-Length:".$file_length);
-        header("Content-Disposition: inline; filename=$ofn");
+        header("Content-Disposition: inline; filename=\"$ofn\"");
         
         // Satisfy range request?
         if(isset($_SERVER["HTTP_RANGE"]))
@@ -156,7 +159,7 @@
             show_extension_mismatch($ext);
             exit(0);
         }
-        serve_file($file, $file_info["ofn"]);
+        serve_file($file, $file_info);
         
         exit(0);
     }

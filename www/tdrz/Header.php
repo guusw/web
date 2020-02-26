@@ -1,6 +1,7 @@
 <?php
-    error_reporting(E_ALL);
-    ini_set("display_errors", '1');
+    // error_reporting(E_ALL);
+    // ini_set("display_errors", "stderr");
+    // ini_set("max_execution_time", 2);
 
     // Configuration
     require "Config.php";
