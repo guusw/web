@@ -4,11 +4,11 @@ After=multi-user.target
 StartLimitIntervalSec=0
 
 [Service]
-Type=simple
-Restart=always
-RestartSec=1
-User=guus
-Group=guus
+Type=forking
+Restart=no
+#   User=guus
+#   Group=guus
+WorkingDirectory=/home/guus/web
 ExecStart=/home/guus/web/run start
 ExecStop=/home/guus/web/run stop
 
