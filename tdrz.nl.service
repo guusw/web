@@ -1,0 +1,17 @@
+[Unit]
+Description=tdrz.nl & co
+After=multi-user.target
+StartLimitIntervalSec=0
+
+[Service]
+Type=simple
+Restart=always
+RestartSec=1
+User=guus
+Group=guus
+ExecStart=/home/guus/web/run start
+ExecStop=/home/guus/web/run stop
+
+[Install]
+WantedBy=multi-user.target
+
