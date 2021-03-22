@@ -14,5 +14,5 @@ fi
 
 MyPath=`dirname $0`
 source $MyPath/.config
-$MyPath/daemonize $1 $MyPath/logs/mysqld.pid mysqld $MYSQL_ARGS
+$MyPath/daemonize $1 $MyPath/logs/mysqld.pid /home/guus/mariadb/bin/mysqld $MYSQL_ARGS
 

@@ -14,6 +14,6 @@ fi
 
 MyPath=`dirname $0`
 source $MyPath/.config
-$MyPath/daemonize $1 $MyPath/logs/php-cgi.pid php-cgi -b $PHP_BIND -c $PHP_CONFIG_PATH
+$MyPath/daemonize $1 $MyPath/logs/php-cgi.pid $MyPath/run_monitored php-cgi $MyPath/logs/php-cgi.log -b $PHP_BIND -c $PHP_CONFIG_PATH
 
 

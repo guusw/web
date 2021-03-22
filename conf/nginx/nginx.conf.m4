@@ -9,16 +9,16 @@ http {
     include       mime.types;
     default_type  application/octet-stream;
 
-    log_format  main  '[$time_local] $remote_addr "$request"'
-                      '\n  $status / $bytes_sent bytes'
-                      '\n  $http_referer / $http_user_agent'
-                      '\n  fastcgi_script_name: $fastcgi_script_name'
-                      '\n  document_root: $document_root'
-                      '\n  document_uri:  $document_uri'
-                      '\n  request_uri:   $request_uri'
-                      '\n  query_string:  $query_string';
+    #log_format  main  '[$time_local] $remote_addr "$request"'
+    #                  '\n  $status / $bytes_sent bytes'
+    #                  '\n  $http_referer / $http_user_agent'
+    #                  '\n  fastcgi_script_name: $fastcgi_script_name'
+    #                  '\n  document_root: $document_root'
+    #                  '\n  document_uri:  $document_uri'
+    #                  '\n  request_uri:   $request_uri'
+    #                  '\n  query_string:  $query_string';
 
-    access_log  ROOT_PATH/logs/access_nginx.log  main;
+    #access_log  ROOT_PATH/logs/access_nginx.log  main;
     error_log ROOT_PATH/logs/error_nginx.log error;
     rewrite_log on;
 
@@ -34,6 +34,27 @@ http {
     client_max_body_size 512m;
     client_body_timeout 5m;
     client_body_temp_path ROOT_PATH/tmp;
+
+    # Mail server
+    server {
+        listen HTTPS_PORT;
+        server_name mail.tdrz.nl;
+        ssl on;
+
+        ssl_certificate ifdef(`CERT_TEST', testcrt.txt, CERTBOT_LIVE/SERVER_NAME/fullchain.pem);
+        ssl_certificate_key ifdef(`CERT_TEST', testkey.txt, CERTBOT_LIVE/SERVER_NAME/privkey.pem);
+
+        location / {
+            root DOCUMENT_ROOT/mail;
+        }
+        
+        
+        # Required for certbot
+        location ^~ /.well-known {
+            autoindex on;
+            alias CERTBOT_WELL_KNOWN_PATH/.well-known;
+        }
+    }
 
     # HTTP File server redirect
     server {
@@ -70,7 +91,7 @@ define(`CONCAT', `$1$2')dnl
             return 302 CREATE_REDIR_URL(REDIR_URL_PORT);
         }
     }
-
+    
     # Coffee git
     server {
         listen HTTPS_PORT;
@@ -82,6 +103,25 @@ define(`CONCAT', `$1$2')dnl
 
         location / {
             proxy_pass http://localhost:GITEA_PORT/;
+        }
+    }
+
+    # Minecraft web
+    server {
+        listen HTTPS_PORT;
+        server_name mc2.tdrz.nl;
+        ssl on;
+
+        ssl_certificate ifdef(`CERT_TEST', testcrt.txt, CERTBOT_LIVE/SERVER_NAME/fullchain.pem);
+        ssl_certificate_key ifdef(`CERT_TEST', testkey.txt, CERTBOT_LIVE/SERVER_NAME/privkey.pem);
+
+        port_in_redirect off;
+
+        location = / {
+            rewrite ^ /index.html permanent;
+        }
+        location / {
+            proxy_pass http://localhost:8123/;
         }
     }
 
@@ -137,7 +177,12 @@ define(`CONCAT', `$1$2')dnl
         location ~ ^/raw(.*)$ {
             root TDRZ_DATA_DIR;
             try_files $1 =404;
-            expires 1d;
+            expires 30d;
+        }
+
+        location ~ ^/tpd-mirror(.*)$ {
+            root DOCUMENT_ROOT/tdrz;
+            autoindex on;
         }
 
         location / {

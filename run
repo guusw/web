@@ -17,4 +17,5 @@ source $MyPath/.config
 $MyPath/run_php $1
 $MyPath/run_mysqld $1
 $MyPath/run_nginx $1
+exit 0
 
