@@ -1,0 +1,10 @@
+#!/bin/bash
+
+BaseDir=$(dirname "$0")
+
+# Restart web server as guus user
+su guus -c "$BaseDir/run_nginx restart"
+
+# Restart mail server
+$BaseDir/../mail/restart
+
