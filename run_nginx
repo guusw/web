@@ -37,8 +37,10 @@ case $1 in
 "reload" | "restart")
     if [ -f $MyPath/logs/nginx.pid ]
     then
+        echo "Quick reloading nginx"
         "$Nginx" -p $ROOT_PATH -c $NGINX_CONFIG_PATH -s reload
     else
+        echo "Restarting nginx"
         "$Nginx" -p $ROOT_PATH -c $NGINX_CONFIG_PATH
     fi
     ;;
