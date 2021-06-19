@@ -43,11 +43,11 @@ addDefine CERTBOT_LIVE
 addDefineBool CERT_TEST
 addDefine CERTBOT_WELL_KNOWN_PATH
 
-m4 $Defines conf/php/php.ini.m4 >conf/php/php.ini
-m4 $Defines conf/nginx/nginx.conf.m4 >conf/nginx/nginx.conf
-m4 $Defines conf/mysql/my.cnf.m4 >conf/mysql/my.cnf
-m4 $Defines $DOCUMENT_ROOT/tdrz/Config.php.m4 >$DOCUMENT_ROOT/tdrz/Config.php
-m4 $Defines $DOCUMENT_ROOT/tdrz/pma/config.inc.php.m4 >$DOCUMENT_ROOT/tdrz/pma/config.inc.php
+m4 $Defines conf/php/php.m4.ini >conf/php/php.ini
+m4 $Defines conf/nginx/nginx.m4.conf >conf/nginx/nginx.conf
+m4 $Defines conf/mysql/my.m4.cnf >conf/mysql/my.cnf
+m4 $Defines $DOCUMENT_ROOT/tdrz/Config.m4.php >$DOCUMENT_ROOT/tdrz/Config.php
+m4 $Defines $DOCUMENT_ROOT/phpMyAdmin-5.1.1-all-languages/config.inc.m4.php >$DOCUMENT_ROOT/phpMyAdmin-5.1.1-all-languages/config.inc.php
 
 # Make sure php paths exist
 mkdir -p $ROOT_PATH/php/sessions

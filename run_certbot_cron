@@ -2,6 +2,9 @@
 
 BaseDir=$(dirname "$0")
 
+# Refresh all certificates
+su guus -c "$BaseDir/run_certbot"
+
 # Restart web server as guus user
 su guus -c "$BaseDir/run_nginx restart"
 

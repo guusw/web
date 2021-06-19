@@ -1,0 +1,46 @@
+#!/bin/bash
+
+function failure()
+{
+    echo "Usage: run_monitored <binary> <log_file> arguments>"
+    exit 1
+}
+
+if [[ "$#" -lt 2 ]]
+then
+    echo "not enough arguments provided $#, expected at least 2"
+    failure
+fi 
+
+Bin=$1
+LogFile=$2
+shift 2
+Args="$@"
+PID=0
+
+trap 'echo "You hit Ctrl-C, Killing child process $PID"; kill $PID; exit' SIGINT SIGQUIT
+
+while true
+do
+    echo "Starting: $Bin $Args"
+    nohup $Bin $Args > $LogFile &
+    PID=$!
+    echo "Current PID: $PID"
+
+    RunStatus=1
+
+    while true
+    do
+        echo "Polling if application is still running"
+        ps $PID >/dev/null
+        RunStatus=$?
+        if [[ $RunStatus -ne 0 ]]
+        then
+            echo "Application terminated, Restarting..." 
+            break
+        else
+            sleep 60
+        fi
+    done
+done
+
