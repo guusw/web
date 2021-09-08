@@ -109,6 +109,8 @@
             $languages["hs"] = $languages["gs"] = $languages["fs"] = $languages["vs"] = $languages["glsl"] = new LangDef("GLSL", "../third-party-brushes/shBrushGlsl.js", "glsl");
             $languages["hlsl"] = $languages["fx"] = new LangDef("HLSL", "../third-party-brushes/shBrushHlsl.js", "hlsl");
             
+            error_log("Extension=$ext");
+            
             global $data_formatted;
             if(!isset($languages[$ext]))
             {
@@ -141,14 +143,17 @@
                 }
                 
                 // Fallback
-                if(!$lang)
+                if(!isset($lang))
                     $lang = new LangDef("plain text", "shBrushPlain.js", "plain");
             }
             else
             {
                 $lang = $languages[$ext];
             }
-            if(count($lang->brush_script) > 0)
+            
+            error_log("Lang=$lang->name");
+            
+            if(!empty($lang->brush_script))
             {
                 $brush_script_path = "Code/sh/".$lang->brush_script;
                 echo "<script type=\"text/javascript\" src=\"$brush_script_path\"></script>";
