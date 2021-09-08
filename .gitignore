@@ -8,6 +8,7 @@
 *.pid
 
 # Binaries, private and temporary folders
+.config
 logs/
 letsencrypt/
 *_temp/
