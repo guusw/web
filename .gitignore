@@ -1,5 +1,6 @@
 # Temp files
 *~
+*.un~
 *.swp
 *.old
 *.index

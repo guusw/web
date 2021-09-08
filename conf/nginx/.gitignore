@@ -1,9 +1,12 @@
+*~
+*.un~
 *.conf
 *.default
+*.bak
 fastcgi_params
 scgi_params
 uwsgi_params
 win-utf
 mime.types
 !fastcgi.conf
-!*.m4
+!*.m4.*
